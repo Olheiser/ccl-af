@@ -1,0 +1,278 @@
+.pageBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(45deg, #fbfcfa 0%, #f7fafc 100%);
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px 60px 20px;
+    width: 100%;
+    max-width: 1280px;
+}
+
+.pageContent {
+    max-width: 800px;
+    /*margin-right: 50px; This space is needed when the form is adjacent*/
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.pageContent p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 28px;
+}
+
+.pageContent ul {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pageContent p, .pageContent li  {
+    font-size: 18px;
+}
+
+.pageContent a {
+    font-size: inherit;
+}
+
+.pageContent p, .pageContent li {
+    color: #333333;
+}
+
+.pageContent a {
+    color:#007b8b;
+}
+
+.pageContent a:hover {
+    color: #bb0000;
+}
+
+.contentBreak {
+    margin-bottom: 20px;
+}
+
+.contentH3Break {
+    margin-bottom: 12px;
+}
+
+.contentList {
+    margin-left: 40px;
+    list-style: disc;
+}
+
+/* Page Margins */
+@media screen and (min-width: 770px) and (max-width: 1479px) {
+    .pageContainer {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media screen and (min-width: 1480px) {
+    .pageContainer {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+/* 2 Column Layout */
+@media screen and (min-width: 1100px) {
+    .pageContainer {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .pageContent {
+        margin-right: 50px;
+    }
+}
+
+/* ======================================= */
+/* ----- Practice Area Category Page -----*/
+/* ======================================= */
+/* Page Margins */
+
+.categoryBody, .teamBody {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    max-width: 1280px;
+}
+
+/* Spacing */
+.categoryCard {
+    padding: 20px 20px;
+}
+
+.categoryLearnMore {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.categoryCard, .teamCard {
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #ffffff 0%, #f6f6f6 100%);
+    border: 2px solid #ffffff;
+}
+
+.categoryHeading, .categoryHeading a {
+    color: #bb0000;
+}
+
+.learnMoreLink, .learnMoreLink a {
+    color: #007b8b;
+}
+
+.learnMoreLink:hover, .learnMoreLink a:hover {
+    color: #bb0000;
+}
+
+.teamBody {
+    align-items: center;
+}
+
+/* ======================================= */
+        /* -----  Team Page -----*/
+/* ======================================= */
+
+.teamCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 20px 20px 20px;
+}
+
+.teamPhoto {
+    padding: 20px 0;
+    margin: 0 auto;
+}
+
+.teamHeading {
+    padding: 0;
+    margin: 0;
+}
+
+/* Fonts */
+.teamHeading {
+    font-size: 28px;
+    font-weight: 400;
+    padding: 0 0 10px 0;
+    line-height: 24px;
+}
+
+.teamSubheading {
+    padding: 0 0 20px 0;
+    margin:0;
+    font-size: 16px;
+    font-family: "Roboto", serif;
+    font-weight: 300;
+    color: #bb0000;
+    line-height: 24px;
+}
+
+.teamCopy {
+    font-weight: 400;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Layout */
+@media screen and (min-width: 800px) {
+
+    .categoryBody {
+        flex-direction: row;
+        flex-wrap: wrap;
+        row-gap: 20px;
+        column-gap: 20px;
+        justify-content: space-between;
+    }
+
+    .categoryCard {
+        width: calc(50% - 10px);
+    }
+
+    .teamBody {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px; /* Adjust the gap between grid items */
+    }
+
+    .teamCard {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Ensures the card takes the full height of its grid row */
+    }
+}
+
+@media screen and (min-width: 770px) and (max-width: 1479px) {
+    .pageContainer {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media screen and (min-width: 1480px) {
+    .pageContainer {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+/* ======================================= */
+        /* -----  About Page -----*/
+/* ======================================= */
+
+.courtHousePhoto {
+    margin: 20px 0 30px 0;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+
+}
+
+.aboutH3, .aboutListDesc {
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+}
+
+.aboutListItem {
+    padding-bottom: 20px;
+}
+
+.aboutH3 {
+    font-weight: 500;
+}
+
+/* ======================================= */
+        /* -----  Reported Cases Page -----*/
+/* ======================================= */
+
+.casesList {
+    padding: 0 20px 20px 40px;
+}
+
+@media screen and (min-width: 1000px) {
+    .casesList {
+        padding: 0 0 20px 60px;
+    }
+}
+
+.casesList li {
+    list-style: disc;
+}
+
+.caseHeading {
+    padding-bottom: 10px;
+    
+}
+
+.faqPageContainer button {
+    color: white;
+}

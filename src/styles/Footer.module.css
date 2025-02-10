@@ -1,0 +1,159 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(180deg, #161616 0%, #2a2e31 100%);
+}
+
+.footerContainer {
+    padding: 40px 20px;
+    max-width: 1280px;
+    margin: 0 auto; /* Centers the container */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust based on layout */
+    flex-direction: column;
+}
+
+.footerItemRow {
+    display: grid;
+    grid-template-columns: 1fr; /* Default: 1 column */
+    gap: 30px; /* Space between items */
+    width: 100%;
+}
+
+
+
+.footerItemWrap {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;
+    align-items: flex-start;*/
+}
+
+.footerItemWrap p {
+    padding: 20px 0 30px 0;
+}
+
+.legalContainer {
+    margin-top: 40px;
+}
+
+.legalDiv {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Font Styling */
+.footerHeader {
+    font-size: 27px;
+    color: #bb0000;
+    font-family: "Optima Nova LT", 'Times New Roman', Times, serif;
+    font-weight: 600;
+}
+
+.footerItemWrap p {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 26px;
+}
+
+.termsOfService {
+    font-size: 13px;
+    color: #ffffff;
+    line-height: 24.1px;
+}
+
+.footerItemWrap p a:hover {
+    color: #bb0000;
+}
+
+/* Button Styles */
+.footerItemWrap button {
+    background-color: #bb0000;
+    padding: 10px 16px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.footerItemWrap button:hover {
+    background-color: #333;
+}
+
+/* Sitemap Styles */
+.footerSitemap {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Full width */
+}
+
+.footerSitemap .footerHeader {
+    text-align: left; /* Aligns the Sitemap title to the left */
+    margin-left: 0; /* Ensures no extra margin pushing it inward */
+}
+
+.footerUl {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0 20px 0;
+    margin: 0;
+    list-style: none; /* Removes default list styling */
+}
+
+/* Ensure list items take full space */
+.footerUl li {
+    flex: 1; /* Allows equal spacing */
+    text-align: left; /* Centers text within each column */
+    padding: 5px 0
+}
+
+
+.footerUl li a {
+    color: #ffffff;
+}
+
+.footerUl li a:hover {
+    color: #bb0000;
+}
+
+
+@media screen and (min-width: 770px) and (max-width: 1479px) {
+    .footerContainer {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media screen and (min-width: 1480px) {
+    .footerContainer {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+/* For tablets (2 columns) */
+@media screen and (min-width: 768px) {
+    .footerItemRow {
+        grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+    }
+}
+
+/* For large screens (3 columns) */
+@media screen and (min-width: 1024px) {
+    .footerItemRow {
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    }
+}

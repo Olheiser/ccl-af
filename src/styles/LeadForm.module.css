@@ -1,0 +1,172 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    padding-top: 0px;
+}
+
+.formContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+/* Ensuring all input elements are styled the same */
+.form input, 
+.form textarea, 
+.form select {
+    padding: 11px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 3px;
+
+    /* Soft shadow effect */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure select and date inputs look consistent */
+.form select,
+.form input[type="date"] {
+
+    background-color: white;
+}
+
+/* Make sure labels and fields take full width of their grid cell */
+.formContainer label,
+.formContainer input,
+.formContainer select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form h2 {
+    padding-bottom: 20px;
+}
+
+.form label {
+    font-family: "Optima Nova LT", sans-serif;
+    font-size: 17px;
+    font-weight:500;
+    color: #000000;
+    padding-bottom: 3px;
+}
+
+.form input::placeholder, .form textarea::placeholder, .form select option, .form select:invalid {
+    font-family: "Optima Nova LT", sans-serif;
+    color: #333333;
+    font-size: 14px;   
+}
+
+/* Full width textarea */
+.form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    resize: vertical;
+    grid-column: span 3;
+}
+
+/* Input fields: each spans 1 column */
+.formContainer input[type="text"],
+.formContainer input[type="email"],
+.formContainer input[type="password"],
+.formContainer input[type="tel"],
+.formContainer input[type="date"],
+.formContainer select {
+    grid-column: span 1;
+}
+
+/* Full width textarea & submit button */
+.form textarea,
+.form .submit {
+    grid-column: span 3;
+}
+
+/* Submit Button */
+.form .submit {
+    background-color: #bb0000;
+    padding: 10px 12px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    margin-bottom: 5px;
+    max-width: 170px;
+    justify-self: center;
+    align-self: center;
+}
+
+/* Responsive adjustments */
+/* Tablet: 2-column layout (Between 600px and 999px) */
+@media screen and (max-width: 999px) {
+    .formContainer {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+
+    
+}
+
+/* Mobile: 1-column layout (Below 600px) */
+@media screen and (max-width: 599px) {
+    .formContainer {
+        grid-template-columns: 1fr; /* 1 column */
+    } 
+}
+
+/* Style the placeholder text color and font style */
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    font-family: "Optima Nova LT", sans-serif;
+    color: #333333;
+    font-size: 14px;
+  }
+  
+  /* Apply styles only when input is empty */
+  input[type="date"]:not(:focus):placeholder-shown::-webkit-datetime-edit-fields-wrapper {
+    font-family: "Optima Nova LT", sans-serif;
+    color: #333333;
+    font-size: 14px;
+  }
+  
+  /* For Firefox - style the entire input text when empty */
+  input[type="date"]:invalid {
+    font-family: "Optima Nova LT", sans-serif;
+    color: #333333;
+    font-size: 14px;
+  }
+  
+  /* Reset styles when a date is selected or input is focused */
+  input[type="date"]:focus,
+  input[type="date"]:valid {
+    font-family: "Optima Nova LT", sans-serif;
+    color: #333333;
+    font-size: 14px;
+  }
+
+  .form input:focus, 
+.form select:focus, 
+.form textarea:focus, 
+.form .submit:hover {
+    border-color: #888; /* Slightly darker border */
+    outline: none;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15); /* Increased shadow */
+}
+
+/* Subtle press-down effect for the button on click */
+.form .submit:active {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+    transform: scale(0.98); /* Slightly smaller on press */
+}

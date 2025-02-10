@@ -1,0 +1,71 @@
+.filterContainer {
+    background-color: #f6f6f6;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25), 
+                2px 2px 5px rgba(0, 0, 0, 0.15);
+    
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterTitle {
+    font-size: 26px;
+    padding-bottom: 10px;
+}
+
+.filterInputWrapper {
+    padding-top: 10px;
+}
+
+.filterContainer input, 
+.filterContainer textarea, 
+.filterContainer select {
+    padding: 11px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 3px;
+
+    /* Soft shadow effect */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure select and date inputs look consistent */
+.filterContainer select,
+.filterContainer input[type="date"] {
+
+    background-color: white;
+}
+
+.filterContainer label {
+    font-family: "Optima Nova LT", sans-serif;
+    font-size: 17px;
+    font-weight:500;
+    color: #000000;
+    padding-bottom: 3px;
+}
+
+.filterContainer select option, .filterContainer select:invalid {
+    font-family: "Optima Nova LT", sans-serif;
+    color: #333333;
+    font-size: 14px;   
+}
+
+.filterContainer select option:first-child {
+    color: #bb0000;
+}
+
+.filterContainer input:focus, 
+.filterContainer select:focus, 
+.filterContainer textarea:focus, 
+.filterContainer .submit:hover {
+    border-color: #888; /* Slightly darker border */
+    outline: none;
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15); /* Increased shadow */
+}
+

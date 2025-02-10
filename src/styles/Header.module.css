@@ -1,0 +1,136 @@
+.header {
+    position: sticky;
+    top: 0; /* Sticks the header to the top of the viewport */
+    z-index: 1000; /* Ensures it appears above other elements */
+    width: 100%;
+    background-color: #ffffff; /* Keeps the background consistent when sticky */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for a more defined sticky effect */
+}
+
+.headerContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 1280px;
+    margin: 0 auto; /* Centers the container */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust based on layout */
+}
+
+/* Titlebar Styles */
+.titleBar {
+    background-color: #bb0000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.titleRow {
+    display: flex;
+    justify-content: space-between; /* Pushes elements to the edges */
+    align-items: center;
+    max-width: 1280px;
+    width: 100%; /* Ensures it takes full width of its parent */
+    padding: 0 20px; /* Add padding for better spacing */
+    box-sizing: border-box;
+}
+
+.titleBar a, .titleBar span {
+    color: #f2f2f2;
+    font-family: "Optima Nova LT";
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.titleBar span {
+    padding: 0 10px;
+}
+
+.titleBar a:hover {
+    color: #000000;
+}
+
+@media screen and (min-width: 770px) and (max-width: 1479px) {
+    .headerContainer, .titleRow {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media screen and (min-width: 1480px) {
+    .headerContainer, .titleRow {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+/* Nav Button Styles */
+
+
+.logo {
+    width: 150px;
+    padding: 10px 0;
+}
+
+.navCTA {
+    display: none;
+}
+
+
+
+@media (min-width: 1000px) {
+    .logo {
+        width: 150px;
+        padding: 10px 0;
+    }
+    
+    .navCTA {
+        display: flex;
+        text-align: right; /* Aligns child elements to the right */
+    }
+    
+    .navCTALink {
+        text-decoration: none;
+    }
+    
+    .navCTAButton {
+        background-color: #F1F4F6 !important;
+        color: #bb0000;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    
+    .navCTAButton .navCTATopRow {
+        color: #bb0000;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    .navCTABottomRow {
+        font-size: 11px;
+        margin-top: -3px;
+        font-weight: 500;
+        color: #000000;
+        letter-spacing: 2px;
+    }
+    
+    .navCTAButton span {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .navCTATopRow:hover {
+        color: #000000;
+    }
+}
+

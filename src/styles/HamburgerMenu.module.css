@@ -1,0 +1,216 @@
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Could cause scroll bug */
+    z-index: 1111; /* Ensure it's above the menu */
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hidden by default */
+    flex-direction: column; /* Stacks menu items vertically */
+    position: fixed; /* Keep it fixed during slide-out */
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 70%; /* Adjust width for slide-out menu */
+    background-color: #ffffff; /* Menu background */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    transform: translateX(100%); /* Start hidden, off-screen to the right */
+    transition: transform 0.3s ease; /* Smooth slide-out effect */
+    z-index: 1000;
+    padding-top: 40px;
+}
+
+.showMenu {
+    display: flex;
+    flex-direction: column;
+    transform: translateX(0); /* Slide into view */
+}
+/* Original 
+.menu li {
+    position: relative;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #007B8B;
+    cursor: pointer;
+}*/
+
+.menu li {
+    padding: 5px 20px 5px 30px;
+    display: flex;
+    /*justify-content: space-between;
+    align-items: center;*/
+    flex-direction: column;
+    color: #007B8B;
+    cursor: pointer;
+}
+
+.menu li:last-child {
+    padding-right: 0;
+}
+/* Targets only the link and dropdown arrow */
+
+
+.menu li a {
+    text-decoration: none;
+    font-size: 16px;
+    flex-grow: 1; /* Push arrow to the right */
+
+}
+
+.activeLink {
+    color: #bb0000; /* Red for the active link */
+}
+
+.menu li a:hover {
+    color: #bb0000; /* Hover effect */
+}
+
+/* Nest dropdown links*/
+.menu .dropdown li a {
+    color: #3a3a3a;
+}
+
+.menu .dropdown li a:hover,
+.subDropdown li:hover > a {
+    color: #bb0000;
+}
+
+.dropdownArrow {
+    font-size: 22px;
+    color: #000; /* Same as mobile link color */
+}
+
+.menuItemRow, .submenuItemRow {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* Dropdown Menu */
+.dropdown {
+    display: none;
+    list-style: none;
+    padding: 0 0 0 16px; /* Indent for dropdown */
+    margin: 0;
+}
+
+.subDropdown {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hidden by default */
+    /*position: absolute; /* Position relative to first dropdown */
+    /*top: 0; /* Align to the first dropdown */
+    z-index: 1001;
+    padding: 10px 0 10px 0;
+
+}
+
+.showDropdown, .showSubDropdown {
+    display: flex; /* Show dropdown when active */
+    flex-direction: column;
+    width: 100%; 
+}
+
+/* =================== */
+/* Adjusting for mobile positioning of submenus */
+
+@media (min-width: 1000px) {
+    .hamburger {
+        display: none;
+    }
+
+    .dropdownArrow {
+        font-size: 22px;
+        color: #000; /* Same as mobile link color */
+    }
+
+    .header {
+        flex-direction: row; /* Keep items in a row */
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: row; /* Inline menu */
+        position: relative;
+        transform: none; /* No slide-out behavior */
+        height: auto;
+        width: auto;
+        background: none; /* Remove background for inline menu */
+        box-shadow: none; /* Remove shadow */
+        padding-top: 0;
+    }
+
+    .menu li {
+        border: none;
+        padding: 0 16px; /* Add spacing between items */
+        color: black; /* Default desktop color */
+        display: flex;
+    }
+
+    .menu li:last-child {
+        padding-right: 0;
+    }
+
+
+    .menu > li {
+        position: relative; /* Parent needs relative for absolute dropdown positioning */
+    }
+
+    .dropdown {
+        position: absolute;
+        top: 100%; /* Align dropdown below parent */
+        left: 0;
+        background: #ffffff;
+        border: 1px solid #ddd; /* Optional border */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        padding: 10px 0 10px 0;
+        display: none; /* Hidden by default */
+        min-width: 250px;
+    }
+
+    .dropdown li {
+        line-height: 40px;
+    }
+
+    li:hover .dropdown {
+        display: block; /* Show dropdown on hover for larger screens */
+    }
+
+    .dropdown li, .nestedLink, .subDropdown li {
+        font-size: 16px;
+    }
+
+    /* Adjusting for mobile submenu placement */
+    .subDropdown {
+        left: 100%;
+        position: absolute; /* Position relative to first dropdown */
+        /* removed top: 0 and it fixed. Align to the first dropdown */
+        background: #ffffff; /* Background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        min-width: 250px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+    .menuItemRow, .submenuItemRow {
+        display: flex;
+        justify-content: flex-start;
+    }
+}
+
+.active {
+    font-weight: 600;
+}

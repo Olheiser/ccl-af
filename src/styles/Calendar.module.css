@@ -1,0 +1,204 @@
+/* Calendar.module.css */
+
+/* General Reset */
+.calendarContainer {
+    font-family: 'Roboto', sans-serif;
+    width: 100%; /* Stretch to full width */
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  /* Header Styles */
+  .calendarHeader {
+    display: flex;
+    justify-content: space-between; /* Space out items */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .calendarHeader h2 {
+    font-family: 'Optima Nova LT', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #bb0000; /* Red accent */
+    flex-grow: 1; /* Allow title to take up remaining space */
+    text-align: center; /* Center the title */
+  }
+  
+  .calendarHeader button {
+    background-color: #bb0000; /* Red accent */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .calendarHeader button:hover {
+    background-color: #990000; /* Darker red on hover */
+  }
+  
+  /* Space between "Prev" and "Next" buttons */
+  .calendarHeader .navButtons {
+    display: flex;
+    gap: 5px; /* 5px space between buttons */
+  }
+  
+  /* Month Grid Styles */
+.monthGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for weekdays (Mon-Fri) */
+    gap: 1px; /* Reduce gap between cells */
+    width: 100%; /* Stretch to full width */
+  }
+  
+  .weekRow {
+    display: contents; /* Allow rows to flow naturally within the grid */
+  }
+  
+  /* Day Cell Styles */
+  .dayCell {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    min-height: 150px; /* Increased height by 15% */
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9; /* Light grey background */
+    transition: background-color 0.3s ease;
+    flex-grow: 1; /* Ensure cells take up all available space */
+  }
+  
+  .dayCell:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+  }
+  
+  .dayNumber {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%; /* Circle shape */
+  }
+  
+  /* Current Day Highlight */
+  .currentDay {
+    background-color: #bb0000; /* Red circle background */
+    color: white; /* White text */
+  }
+  
+  /* Day Label Styles */
+  .dayLabels {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .dayLabel {
+    background-color: #bb0000; /* Red accent */
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dayLabel span {
+    font-size: inherit; /* Ensure the text inherits the font size */
+  }
+
+  .dayLabel:hover {
+    background-color: #990000; /* Darker red on hover */
+  }
+  
+  /* Modal Styles */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    position: relative; /* For positioning the close button */
+  }
+  
+  .modal h3 {
+    font-family: 'Optima Nova LT', serif;
+    font-size: 20px;
+    color: #bb0000; /* Red accent */
+    margin-bottom: 16px;
+  }
+  
+  .modal p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 8px;
+  }
+  
+  .modal button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .modal button:hover {
+    background-color: #333333; /* Slightly lighter black on hover */
+  }
+
+/* Weekday Row Styles */
+.weekdayRow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for weekdays (Mon-Fri) */
+    gap: 1px; /* Match the gap in the month grid */
+    background-color: #bb0000; /* Red background */
+    color: white; /* White text */
+    padding: 8px 0; /* Add some padding */
+    border-radius: 4px 4px 0 0; /* Rounded corners at the top */
+    font-weight: 500; /* Slightly bold */
+    font-size: 14px; /* Reduced by 2px (assuming the default was 16px) */
+  }
+
+  .weekdayRow div {
+    text-align: right; /* Right-align the text */
+    padding-right: 8px; /* Add some padding to the right for spacing */
+  }
