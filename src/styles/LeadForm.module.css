@@ -128,29 +128,29 @@
 }
 
 /* Style the placeholder text color and font style */
-input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+.form input[type="date"]::-webkit-datetime-edit-fields-wrapper {
     font-family: "Optima Nova LT", sans-serif;
     color: #333333;
     font-size: 14px;
   }
   
   /* Apply styles only when input is empty */
-  input[type="date"]:not(:focus):placeholder-shown::-webkit-datetime-edit-fields-wrapper {
+ .form input[type="date"]:not(:focus):placeholder-shown::-webkit-datetime-edit-fields-wrapper {
     font-family: "Optima Nova LT", sans-serif;
     color: #333333;
     font-size: 14px;
   }
   
   /* For Firefox - style the entire input text when empty */
-  input[type="date"]:invalid {
+ .form input[type="date"]:invalid {
     font-family: "Optima Nova LT", sans-serif;
     color: #333333;
     font-size: 14px;
   }
   
   /* Reset styles when a date is selected or input is focused */
-  input[type="date"]:focus,
-  input[type="date"]:valid {
+.form input[type="date"]:focus,
+.form input[type="date"]:valid {
     font-family: "Optima Nova LT", sans-serif;
     color: #333333;
     font-size: 14px;
