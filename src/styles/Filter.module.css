@@ -135,10 +135,3 @@
 .filterInputWrapper input[type="date"]::-webkit-datetime-edit {
     color: #333333 !important;
 }
-
-
-.filterInputWrapper input[type="date"] {
-    -webkit-appearance: none; /* Removes iOS default styling */
-    -moz-appearance: none;
-    appearance: none;
-}
