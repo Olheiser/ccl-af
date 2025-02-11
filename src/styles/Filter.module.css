@@ -70,3 +70,12 @@
     box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15); /* Increased shadow */
 }
 
+.filterContainer input::placeholder {
+    color: #333333 !important;
+    opacity: 1; /* Ensure full visibility */
+}
+
+.filterInputWrapper input::placeholder {
+    color: #333333 !important;
+    opacity: 1;
+  }
