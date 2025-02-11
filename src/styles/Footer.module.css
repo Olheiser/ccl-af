@@ -99,6 +99,8 @@
     width: 100%; /* Full width */
 }
 
+
+
 .footerSitemap .footerHeader {
     text-align: left; /* Aligns the Sitemap title to the left */
     margin-left: 0; /* Ensures no extra margin pushing it inward */
@@ -155,5 +157,10 @@
 @media screen and (min-width: 1024px) {
     .footerItemRow {
         grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    }
+}
+@media screen and (max-width: 1200px) {
+    .footerSitemap {
+        padding-top: 25px;
     }
 }
