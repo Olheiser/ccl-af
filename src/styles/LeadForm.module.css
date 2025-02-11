@@ -205,3 +205,36 @@
         padding-top: 20px;
     }
 }
+
+/* Override inherited styles for radio buttons */
+.form input[type="radio"] {
+    box-shadow: none; /* Remove inherited box shadow */
+  }
+  
+
+  
+  /* Grouping radio buttons and labels inline */
+  .radioGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px; /* Space between Yes/No groups */
+    margin-top: 4px;
+  }
+
+  .radioRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    text-align: left;
+    width: 100%;
+  }
+  
+  /* Ensure label alignment */
+  .radioGroup label {
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

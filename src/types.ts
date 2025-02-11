@@ -9,5 +9,7 @@ export type CourtAppearance = {
   province: string;
   courtroomNumber?: string;  // Optional
   typeOfAppearance?: string; // Optional
+  accusedStatus?: string; // Optional
+  designationStatus?: string; // Optional
   instructions?: string;     // Optional
   };

@@ -20,6 +20,9 @@ export default function RequestModal({ appearance, onClose }: RequestModalProps)
         <p><strong>Counsel:</strong> {appearance.lawyerName}</p>
         <p><strong>Email:</strong> <a className={styles.modalEmail} href={`mailto:${appearance.email}`}>{appearance.email}</a></p>
         {appearance.typeOfAppearance && <p><strong>Type of Appearance:</strong> {appearance.typeOfAppearance}</p>}
+        {appearance.accusedStatus && <p><strong>Will the Accused be Present?</strong> {appearance.accusedStatus}</p>}
+        {appearance.designationStatus && <p><strong>Has a Designation Been Filed With the Court?</strong> {appearance.designationStatus}</p>}
+
         {appearance.instructions && <p><strong>Instructions:</strong> {appearance.instructions}</p>}
         <div className={styles.modalEmailContainer}>
           <a href={`mailto:${appearance.email}`}>

@@ -13,6 +13,8 @@ interface CourtAppearance {
   time: string;
   courtroomNumber: string;
   typeOfAppearance: string;
+  accusedStatus: string;
+  designationStatus: string;
   instructions: string;
 }
 
@@ -56,6 +58,8 @@ const LeadForm = () => {
       time: formData.get('time') as string,
       courtroomNumber: formData.get('courtroom') as string,
       typeOfAppearance: formData.get('appearanceType') as string,
+      accusedStatus: formData.get('accusedStatus') as string,
+      designationStatus: formData.get('designationStatus') as string,
       instructions: formData.get('message') as string,
     };
 
@@ -146,6 +150,29 @@ const LeadForm = () => {
           <label htmlFor="appearanceType">Type of Appearance</label>
           <input type="text" name="appearanceType" id="appearanceType" placeholder="Type of Appearance..." />
         </div>
+
+        <div className={styles.radioGroup}>
+          <label>Will the Accused be Present?</label>
+          <div className={styles.radioRow}>
+            <input type="radio" name="accusedStatus" id="accusedYes" value="Yes" />
+            <label htmlFor="accusedYes">Yes</label>
+
+            <input type="radio" name="accusedStatus" id="accusedNo" value="No" />
+            <label htmlFor="accusedNo">No</label>
+          </div>
+        </div>
+
+        <div className={styles.radioGroup}>
+          <label>Has a Designation Been Filed With the Court?</label>
+          <div className={styles.radioRow}>
+            <input type="radio" name="designationStatus" id="designationYes" value="Yes" />
+            <label htmlFor="designationYes">Yes</label>
+
+            <input type="radio" name="designationStatus" id="designationNo" value="No" />
+            <label htmlFor="designationNo">No</label>
+          </div>
+        </div>
+
       </div>
 
       <div>
