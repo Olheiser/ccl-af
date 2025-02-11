@@ -6,8 +6,15 @@ import ScrollToTop from "./components/ScrollToTop";
 import "./globals.css"
 import type { Metadata } from "next";
 import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
+//import { Roboto } from 'next/font/google';
 
 //import { PopupButton } from "react-calendly";
+
+/*const roboto = Roboto({
+  weight: ['400', '700'], // Specify the font weights you need
+  subsets: ['latin'], // Specify the subsets you need
+  display: 'swap', // Ensure the font is loaded with a fallback
+});*/
 
 export const metadata: Metadata = {
   title: "Agent Finder | Request for an appearance platform",
