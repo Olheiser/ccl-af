@@ -354,4 +354,8 @@
       color: #333333;
       opacity: 1;
     }
+
+    .weekdayRow {
+      font-size: 12px;
+    }
   }
