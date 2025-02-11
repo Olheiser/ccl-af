@@ -78,36 +78,60 @@
 
 .filterContainer input::placeholder {
     color: #333333 !important;
-    opacity: 1; /* Ensure full visibility */
+    opacity: 1 !important; /* Ensure full visibility */
 }
 
 .filterInputWrapper input::placeholder {
     color: #333333 !important;
-    opacity: 1;
+    opacity: 1 !important;
   }
 
   .filterContainer input::placeholder,
 .filterInputWrapper input::placeholder {
     color: #333333 !important;
-    opacity: 1; /* Ensures it's fully visible */
+    opacity: 1 !important; /* Ensures it's fully visible */
 }
 
 /* Style the text inside input[type="date"] */
 .filterInputWrapper input[type="date"] {
     color: #333333 !important;
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 /* Style the first option in the <select> */
 .filterContainer select option:first-child {
-    color: #333333; /* Adjust color to mimic a placeholder */
-    opacity: 1;
+    color: #333333 !important; /* Adjust color to mimic a placeholder */
+    opacity: 1 !important;
 }
 
 /* If the user hasn't selected anything, change text color */
 .filterContainer select:invalid {
-    color: #333333;
-    opacity: 1;
+    color: #333333 !important;
+    opacity: 1 !important;
+}
+
+.filterContainer select {
+    color: #333333 !important;
+    opacity: 1 !important;
+
+}
+
+.filterContainer input:-webkit-input-placeholder,
+.filterInputWrapper input:-webkit-input-placeholder {
+    color: #333333 !important;
+    opacity: 1 !important;
 }
 
 /* #999999; */
+
+.filterInputWrapper input[type="date"] {
+    color: #333333 !important;
+    background-color: white !important;
+    opacity: 1 !important;
+    font-weight: normal !important;
+}
+
+/* Override iOS default text color inside the date picker */
+.filterInputWrapper input[type="date"]::-webkit-datetime-edit {
+    color: #333333 !important;
+}
