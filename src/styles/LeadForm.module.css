@@ -257,11 +257,15 @@
     margin-left: 20px;
 }
 
-.dateContainer {
+ */
+ .dateContainer {
     display: flex;
     flex-direction: column;
-} */
+}
 
+.dateContainer input {
+    width: 100%;
+}
 
 /* Base styles */
 .radioGroup {
@@ -286,7 +290,7 @@
 .radioContainer {
     display: flex;
     flex-direction: row;
-    padding-right: 30px;
+    padding-right: 15px;
 }
 
 .radioContainer label {
