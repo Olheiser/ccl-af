@@ -297,3 +297,9 @@
   .modalEmailButton:hover {
     background-color: #900001;
   }
+
+  @media screen and (max-width: 700px) {
+    .dayCell {
+      padding: 0;
+    }
+  }
