@@ -258,7 +258,7 @@
 }
 
  */
- .dateContainer {
+.dateContainer {
     display: flex;
     flex-direction: column;
 }
@@ -269,30 +269,32 @@
 
 /* Base styles */
 .radioGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 12px; /* Space between radio rows */
     margin-top: 4px;
 }
 
+/* Each row of radio buttons */
 .radioRow {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr; /* Radio button on the left, label on the right */
+    align-items: center; /* Vertically center items */
+    gap: 8px; /* Space between radio button and label */
 }
 
+/* Label styling */
 .radioGroup label {
     font-size: 16px;
     cursor: pointer;
-    margin: 0;
+    margin: 0; /* Remove default margin */
 }
 
+/* Container for radio buttons */
 .radioContainer {
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    max-width: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for Yes/No options */
+    gap: 8px; /* Space between radio buttons */
+    width: 100%; /* Take full width */
+    max-width: 100px; /* Limit maximum width */
 }
