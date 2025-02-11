@@ -42,7 +42,7 @@ export default function Day({ day, courtAppearances }: DayProps) {
       <div className={styles.dayLabels}>
           {matchingCourtAppearances.length > 2 ? (
             <div className={styles.dayLabel} onClick={handleDayClick}>
-              <span>{matchingCourtAppearances.length} Appearances</span>
+              <span>{matchingCourtAppearances.length} Requests</span>
             </div>
           ) : (
             matchingCourtAppearances.map((appearance) => (
