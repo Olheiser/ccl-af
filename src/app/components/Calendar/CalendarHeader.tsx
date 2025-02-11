@@ -32,8 +32,8 @@ interface CalendarHeaderProps {
   
     return (
       <div className={styles.calendarHeader}>
-        <button onClick={handleReset}>Today</button>
-        <h2>{dayjs(new Date(dayjs().year(), monthIndex)).format('MMMM YYYY')}</h2>
+        <button className={styles.resetButton} onClick={handleReset}>Today</button>
+        <h2 className={styles.calendarTitle}>{dayjs(new Date(dayjs().year(), monthIndex)).format('MMMM YYYY')}</h2>
         <div>
         <select
           name="province"
