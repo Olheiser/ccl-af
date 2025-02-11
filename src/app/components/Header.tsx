@@ -11,7 +11,7 @@ const Header = () => {
             <div className={styles.titleBar}>
                 <div className={styles.titleRow}>
                     <div>
-                        <a href="https://canadacriminallawyer.ca">&larr; Back to Main Site</a>
+                        <a href="https://canadacriminallawyer.ca">&larr; Main Site</a>
                     </div>
                     
                     <div className={styles.affiliateContainer}>
