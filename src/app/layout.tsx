@@ -21,24 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Tag (gtag.js) 
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-653876065"
-          strategy="afterInteractive" // Ensures script runs after page load
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive" // Runs after the page becomes interactive
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'AW-653876065');
-            `,
-          }}
-        />*/}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#bb0000" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body id="root">
         <Header />
