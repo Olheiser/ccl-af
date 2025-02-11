@@ -83,6 +83,7 @@
     grid-template-columns: repeat(5, 1fr); /* 5 columns for weekdays (Mon-Fri) */
     gap: 1px; /* Reduce gap between cells */
     width: 100%; /* Stretch to full width */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   }
   
   .weekRow {
