@@ -331,10 +331,27 @@
     }
 
     .calendarTitle {
-      font-size: 20px !important;
+      font-size: 18px !important;
     }
 
     .resetButton {
-      padding: 10px 10px !important;
+      padding: 6px 6px !important;
+    }
+
+    .monthParser {
+      padding: 6px 13px !important;
+    }
+
+    .provinceFilter {
+      margin-right: 5px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      height: 37px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      color: #333333;
+      opacity: 1;
     }
   }

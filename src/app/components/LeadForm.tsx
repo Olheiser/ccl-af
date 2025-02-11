@@ -131,7 +131,7 @@ const LeadForm = () => {
           <input type="text" name="courthouse" id="courthouse" required placeholder="Courthouse Name..." />
         </div>
 
-        <div>
+        <div className={styles.dateContainer}>
           <label htmlFor="date">Date of Appearance</label>
           <input type="date" name="date" id="date" required placeholder="Date of Appearance..." min={new Date().toISOString().split("T")[0]}/>
         </div>

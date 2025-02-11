@@ -56,8 +56,8 @@ interface CalendarHeaderProps {
           <option value="SK">SK</option>
           <option value="YT">YT</option>
         </select>
-          <button onClick={handlePrevMonth}><strong>{`<`}</strong></button>
-          <button onClick={handleNextMonth}><strong>{`>`}</strong></button>
+          <button className={styles.monthParser} onClick={handlePrevMonth}><strong>{`<`}</strong></button>
+          <button className={styles.monthParser} onClick={handleNextMonth}><strong>{`>`}</strong></button>
         </div>
         {/* Add the Province filter dropdown */}
         

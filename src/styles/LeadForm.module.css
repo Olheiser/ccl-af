@@ -257,3 +257,8 @@
 .rightContainer {
     margin-left: 20px;
 }
+
+.dateContainer {
+    display: flex;
+    flex-direction: column;
+}
