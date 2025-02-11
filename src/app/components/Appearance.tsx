@@ -36,7 +36,7 @@ import RequestModalProps from "./Calendar/Modal";
       <>
       <div className={styles.appearanceWrapper} onClick={() => setIsModalOpen(true)}>
         <div className={styles.appearanceText}>
-          {appearance.lawyerName} needs an agent for {formattedDate} at {appearance.time} in {appearance.courthouseName}, {appearance.province}
+          {appearance.lawyerName} <span className={styles.appearanceBoiler}>needs an agent for</span> {formattedDate} <span className={styles.appearanceBoiler}>at</span> {appearance.time} <span className={styles.appearanceBoiler}>in</span> {appearance.courthouseName}<span className={styles.appearanceBoiler}>,</span> {appearance.province}
         </div>
         <div className={styles.appearanceIcons}>
           <a href={`mailto:${appearance.email}`}>
@@ -56,3 +56,5 @@ import RequestModalProps from "./Calendar/Modal";
 
     );
   }
+
+  

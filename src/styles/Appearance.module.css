@@ -45,3 +45,10 @@
 .appearanceWrapper {
     margin: 7px 0;
 }
+
+.appearanceBoiler {
+    font-family: "Roboto", 'Times New Roman', Times, serif;
+    font-weight: 400;
+    color: #000000;
+    opacity: 1;
+}

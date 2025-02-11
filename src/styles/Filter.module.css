@@ -18,6 +18,12 @@
 
 .filterInputWrapper {
     padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterInputWrapper input[type="date"] {
+    width: 100%;
 }
 
 .filterContainer input, 
@@ -79,3 +85,29 @@
     color: #333333 !important;
     opacity: 1;
   }
+
+  .filterContainer input::placeholder,
+.filterInputWrapper input::placeholder {
+    color: #333333 !important;
+    opacity: 1; /* Ensures it's fully visible */
+}
+
+/* Style the text inside input[type="date"] */
+.filterInputWrapper input[type="date"] {
+    color: #333333 !important;
+    opacity: 1;
+}
+
+/* Style the first option in the <select> */
+.filterContainer select option:first-child {
+    color: #333333; /* Adjust color to mimic a placeholder */
+    opacity: 1;
+}
+
+/* If the user hasn't selected anything, change text color */
+.filterContainer select:invalid {
+    color: #333333;
+    opacity: 1;
+}
+
+/* #999999; */
