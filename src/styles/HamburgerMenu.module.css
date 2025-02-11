@@ -9,6 +9,8 @@
     justify-content: center;
     position: relative; /* Could cause scroll bug */
     z-index: 1111; /* Ensure it's above the menu */
+    color: #000000;
+    opacity: 1;
 }
 
 .menu {
