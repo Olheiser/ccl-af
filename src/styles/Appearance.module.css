@@ -38,6 +38,8 @@
 .appearanceText {
     font-family: 'Roboto', 'Times New Roman', Times, serif;
     font-weight: 500;
+    color: #000000 !important;
+    z-index: 1000;
 }
 
 .appearanceWrapper {
