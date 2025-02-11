@@ -24,7 +24,8 @@ import Filter from "../components/Filter";
     const [totalPages, setTotalPages] = useState(1);
     const [dateFilter, setDateFilter] = useState<string | undefined>(undefined);
     const [provinceFilter, setProvinceFilter] = useState<string | undefined>(undefined);
-  
+    const [loading, setLoading] = useState(true); // 
+
     const fetchAppearances = async (page: number = 1, dateFilter?: string, provinceFilter?: string) => {
       const url = `/api/appearances?page=${page}&date=${dateFilter || ''}&province=${provinceFilter || ''}`;
       const response = await fetch(url);
@@ -35,12 +36,15 @@ import Filter from "../components/Filter";
     };
   
     const loadAppearances = async () => {
+      setLoading(true); //
       try {
         const data = await fetchAppearances(page, dateFilter, provinceFilter);
         setAppearances(data.appearances);
         setTotalPages(data.totalPages);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
   
@@ -78,31 +82,37 @@ import Filter from "../components/Filter";
   
     return (
       <main className={styles.pageBody}>
-        <div className={styles.pageContainer}>
-          <article className={styles.pageContent}>
-            <h1 className={styles.title}>Appearance Requests</h1>
-            {appearances.map((appearance) => (
+      <div className={styles.pageContainer}>
+        <article className={styles.pageContent}>
+          <h1 className={styles.title}>Appearance Requests</h1>
+          {loading ? (
+            <div className={styles.loader}></div>
+          ) : (
+            appearances.map((appearance) => (
               <Appearance key={appearance.id} appearance={appearance} />
-            ))}
-            {appearances.length > 15 && (
-              <div className={styles.pagination}>
-                <button onClick={handlePrevPage} disabled={page === 1}>
-                  Previous
-                </button>
-                <span className={styles.paginationCrumb}>Page {page} of {totalPages}</span>
-                <button onClick={handleNextPage} disabled={page === totalPages}>
-                  Next
-                </button>
-              </div>
-            )}
-          </article>
-          <aside className={styles.form}>
-            <Filter
-              onDateFilterChange={handleDateFilterChange}
-              onProvinceFilterChange={handleProvinceFilterChange}
-            />
-          </aside>
-        </div>
-      </main>
+            ))
+          )}
+          {appearances.length > 15 && (
+            <div className={styles.pagination}>
+              <button onClick={handlePrevPage} disabled={page === 1}>
+                Previous
+              </button>
+              <span className={styles.paginationCrumb}>
+                Page {page} of {totalPages}
+              </span>
+              <button onClick={handleNextPage} disabled={page === totalPages}>
+                Next
+              </button>
+            </div>
+          )}
+        </article>
+        <aside className={styles.form}>
+          <Filter
+            onDateFilterChange={handleDateFilterChange}
+            onProvinceFilterChange={handleProvinceFilterChange}
+          />
+        </aside>
+      </div>
+    </main>
     );
   }
