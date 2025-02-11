@@ -1,114 +1,179 @@
-"use client"
+"use client";
 
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from '@/styles/LeadForm.module.css';
 
+interface CourtAppearance {
+  lawyerName: string;
+  email: string;
+  province: string;
+  courthouseName: string;
+  date: string;
+  time: string;
+  courtroomNumber: string;
+  typeOfAppearance: string;
+  instructions: string;
+}
+
 const LeadForm = () => {
-    const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-    const form = useRef<HTMLFormElement | null>(null);
+  const form = useRef<HTMLFormElement | null>(null);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        
-        if (!form.current) {
-            console.error("Form reference is undefined");
-            return;
-        }
+  const submitAppearance = async (appearance: CourtAppearance) => {
+    const response = await fetch('/api/appearances', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(appearance),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to add court appearance');
+    }
+    return response.json();
+  };
 
-        emailjs
-            .sendForm("service_zlvlw4s", "template_xvkv9vq", form.current, {
-                publicKey: "AP4HXf2HPRERJu4fd"
-            })
-            .then(
-                () => {
-                    console.log("SUCCESS!");
-                    // Add form submission logic here (e.g., API call)
-                    setFormSubmitted(true);
-                },
-                (error) => {
-                    console.log("FAILED...", error.text);
-                },
-            );  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null); // Reset any previous errors
+
+    if (!form.current) {
+      console.error("Form reference is undefined");
+      return;
+    }
+
+    // Extract form data
+    const formData = new FormData(form.current);
+    const appearance: CourtAppearance = {
+      lawyerName: formData.get('name') as string,
+      email: formData.get('email') as string,
+      province: formData.get('province') as string,
+      courthouseName: formData.get('courthouse') as string,
+      date: formData.get('date') as string,
+      time: formData.get('time') as string,
+      courtroomNumber: formData.get('courtroom') as string,
+      typeOfAppearance: formData.get('appearanceType') as string,
+      instructions: formData.get('message') as string,
     };
 
-    return (
-        <form className={styles.form} onSubmit={handleSubmit} ref={form}>
-            <h2 className={styles.secondaryTitle}>Appearance Information</h2>
-            <div className={styles.formContainer}>
+    try {
+      // Submit the form data to the API
+      await submitAppearance(appearance);
+      console.log('Court appearance submitted successfully');
 
-                <div>
-                    <label htmlFor="fullName">Requesting Lawyer Name</label>
-                    <input type="text" name="name" id="name" 
-                        required placeholder="Requesting Lawyer Name..."/>
-                </div>
+      // Send email using EmailJS
+      await emailjs.sendForm(
+        "service_zlvlw4s",
+        "template_vkqmvak",
+        form.current,
+        { publicKey: "AP4HXf2HPRERJu4fd" }
+      );
+      console.log('Email sent successfully');
 
-                <div>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="email" name="email" id="email" required placeholder="Email Address..." pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
-                </div>
+      // Mark the form as submitted
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error('Failed to submit form:', error);
+      setError('Failed to submit form. Please try again.');
+    }
+  };
 
-                <div>
-                <label htmlFor="province">Province</label>
-                <select name="province" id="province" required>
-                    <option value="" disabled>Province...</option>
-                    <option value="AB">Alberta</option>
-                    <option value="BC">British Columbia</option>
-                    <option value="MB">Manitoba</option>
-                    <option value="NB">New Brunswick</option>
-                    <option value="NL">Newfoundland and Labrador</option>
-                    <option value="NS">Nova Scotia</option>
-                    <option value="NT">Northwest Territories</option>
-                    <option value="NU">Nunavut</option>
-                    <option value="ON">Ontario</option>
-                    <option value="PE">Prince Edward Island</option>
-                    <option value="QC">Quebec</option>
-                    <option value="SK">Saskatchewan</option>
-                    <option value="YT">Yukon</option>
-                </select>
-                </div>
+  function resetForm() {
+    if (form.current) {
+      form.current.reset(); // Resets all input fields
+    }
+    setFormSubmitted(false); // Allow form to be submitted again
+  }
 
-                <div>
-                    <label htmlFor="courthouse">Courthouse Name</label>
-                    <input type="text" name="courthouse" id="courthouse" required placeholder="Courthouse Name..." />
-                </div>
+  return (
+    <form className={styles.form} onSubmit={handleSubmit} ref={form}>
+      <h2 className={styles.secondaryTitle}>Appearance Information</h2>
+      <div className={styles.formContainer}>
+        <div>
+          <label htmlFor="fullName">Requesting Lawyer Name</label>
+          <input type="text" name="name" id="name" required placeholder="Requesting Lawyer Name..." />
+        </div>
 
-                <div>
-                    <label htmlFor="date">Date of Appearance</label>
-                    <input type="date" name="date" id="date" required placeholder="Date of Appearance..."/>
-                </div>
+        <div>
+          <label htmlFor="email">Email Address</label>
+          <input type="email" name="email" id="email" required placeholder="Email Address..." pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+        </div>
 
-                <div>
-                    <label htmlFor="date">Time</label>
-                    <input type="text" name="time" id="time" required placeholder="Time..."/>
-                </div>
+        <div>
+          <label htmlFor="province">Province</label>
+          <select name="province" id="province" required>
+            <option value="" disabled>Province...</option>
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NU">Nunavut</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="YT">Yukon</option>
+          </select>
+        </div>
 
-                <div>
-                    <label htmlFor="courtroom">Courtroom Number</label>
-                    <input type="text" name="courtroom" id="courtroom" required placeholder="Courtroom Number..."/>
-                </div>
+        <div>
+          <label htmlFor="courthouse">Courthouse Name</label>
+          <input type="text" name="courthouse" id="courthouse" required placeholder="Courthouse Name..." />
+        </div>
 
-                <div>
-                    <label htmlFor="appearanceType">Type of Appearance</label>
-                    <input type="text" name="appearanceType" id="appearanceType" required placeholder="Type of Appearance..."/>
-                </div>
-            </div>
+        <div>
+          <label htmlFor="date">Date of Appearance</label>
+          <input type="date" name="date" id="date" required placeholder="Date of Appearance..." min={new Date().toISOString().split("T")[0]}/>
+        </div>
 
-            <div>
-                <label htmlFor="message">Instructions</label>
-                <textarea name="message" id="message" required placeholder="Your Message..."></textarea>
-            </div>
+        <div>
+          <label htmlFor="time">Time</label>
+          <input type="text" name="time" id="time" required placeholder="Time..." />
+        </div>
 
-            <button className={styles.submit} type="submit" disabled={formSubmitted}>
-                {formSubmitted ? "Request Sent" : "Submit"}
-            </button>
+        <div>
+          <label htmlFor="courtroom">Courtroom Number</label>
+          <input type="text" name="courtroom" id="courtroom" required placeholder="Courtroom Number..." />
+        </div>
 
-            {formSubmitted && (
-                <p className={styles.successMessage}>Thank you! Your request has been submitted.</p>
-            )}
-        </form>
-    )
-}
+        <div>
+          <label htmlFor="appearanceType">Type of Appearance</label>
+          <input type="text" name="appearanceType" id="appearanceType" placeholder="Type of Appearance..." />
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="message">Instructions</label>
+        <textarea name="message" id="message" placeholder="Your Message..."></textarea>
+      </div>
+
+      {/* Submit and Reset Buttons */}
+      <div className={styles.buttonContainer}>
+        <button className={styles.submit} type="submit" disabled={formSubmitted}>
+          {formSubmitted ? "Request Sent" : "Submit"}
+        </button>
+
+        
+        {formSubmitted && (
+          <button className={styles.resetButton} onClick={resetForm}>&#10226;</button>
+        )}
+      </div>
+
+      {formSubmitted && (
+        <p className={styles.successMessage}>Thank you! Your request has been submitted.</p>
+      )}
+
+      {error && (
+        <p className={styles.errorMessage}>{error}</p>
+      )}
+    </form>
+  );
+};
 
 export default LeadForm;

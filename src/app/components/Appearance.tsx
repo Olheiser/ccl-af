@@ -1,27 +1,58 @@
+"use client"
+
 import styles from "@/styles/Appearance.module.css";
 import Image from "next/image";
-import HandIcon from "../../../public/grab.webp"
 import EmailIcon from "../../../public/email.webp"
 
+import { useState } from 'react';
+import RequestModalProps from "./Calendar/Modal";
 
-export default function Appearance() {
+  interface AppearanceProps {
+    appearance: {
+      id: string;
+      lawyerName: string;
+      email: string;
+      date: string;
+      time: string;
+      courthouseName: string;
+      province: string;
+      courtroomNumber?: string;  // Optional
+      typeOfAppearance?: string; // Optional
+      instructions?: string;     // Optional
+    };
+  }
+
+  export default function Appearance({ appearance }: AppearanceProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const formattedDate = new Date(`${appearance.date}T00:00:00`).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+
     return (
-        <div className={styles.appearanceWrapper}>
-            <div className={styles.appearanceText}>Jaggi needs an agent for January 3rd in Estevan PC at 10AM</div>
-            <div className={styles.appearanceIcons}>
-                <Image 
-                    width={20} 
-                    height={20}
-                    src={HandIcon}
-                    alt="Claim this appearance"   
-                />
-                <Image 
-                    width={20} 
-                    height={20}
-                    src={EmailIcon}
-                    alt="Email counsel about this appearance"  
-                />
-            </div>
+      <>
+      <div className={styles.appearanceWrapper} onClick={() => setIsModalOpen(true)}>
+        <div className={styles.appearanceText}>
+          {appearance.lawyerName} needs an agent for {formattedDate} at {appearance.time} in {appearance.courthouseName}, {appearance.province}
         </div>
-    )
-}
+        <div className={styles.appearanceIcons}>
+          <a href={`mailto:${appearance.email}`}>
+            <Image
+                width={20}
+                height={20}
+                src={EmailIcon}
+                alt="Email counsel about this appearance"
+            />
+          </a>
+        </div>
+      </div>
+      {isModalOpen && (
+        <RequestModalProps appearance={appearance} onClose={() => setIsModalOpen(false)} />
+      )}
+      </>
+
+    );
+  }

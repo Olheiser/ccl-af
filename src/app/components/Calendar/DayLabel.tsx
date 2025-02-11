@@ -13,8 +13,11 @@ export default function DayLabel({ appearance }: DayLabelProps) {
 
   return (
     <>
-      <div className={styles.dayLabel} onClick={() => setIsModalOpen(true)}>
-        <span>{appearance.caseName}</span>
+      <div className={styles.dayLabel} onClick={(event: React.MouseEvent) => { 
+        event.stopPropagation(); 
+        setIsModalOpen(true); 
+    }}>
+        <span>{appearance.lawyerName} in {appearance.courthouseName} at {appearance.time}</span>
       </div>
       {isModalOpen && (
         <Modal appearance={appearance} onClose={() => setIsModalOpen(false)} />

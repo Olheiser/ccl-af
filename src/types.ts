@@ -1,9 +1,13 @@
 // src/types.ts
 export type CourtAppearance = {
-    id: number;
-    date: string;
-    caseName: string;
-    details: string;
-    location: string;
-    time: string;
+  id: string;
+  lawyerName: string;
+  email: string;
+  date: string;
+  time: string;
+  courthouseName: string;
+  province: string;
+  courtroomNumber?: string;  // Optional
+  typeOfAppearance?: string; // Optional
+  instructions?: string;     // Optional
   };

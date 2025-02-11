@@ -1,5 +1,5 @@
 .filterContainer {
-    background-color: #f6f6f6;
+    background: linear-gradient(45deg, #ffffff 0%, #f6f6f6 100%);
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25), 
                 2px 2px 5px rgba(0, 0, 0, 0.15);
     
@@ -8,6 +8,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    border: 2px solid #ffffff;
 }
 
 .filterTitle {
@@ -24,7 +25,7 @@
 .filterContainer select {
     padding: 11px 15px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     font-size: 14px;
     margin-bottom: 12px;
     width: 100%;

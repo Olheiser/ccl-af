@@ -7,11 +7,16 @@
     padding: 10 15px;
 
     /* Styles */
-    background-color: #f6f6f6;
+    background-color: #ffffff;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25), 
                 2px 2px 5px rgba(0, 0, 0, 0.15);
     
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.appearanceWrapper:hover {
+    cursor: pointer;
+    background-color: #f0f0f0;
 }
 
 .appearanceIcons {
@@ -21,11 +26,20 @@
     align-items: center;
 }
 
-.appearanceIcons img:first-child {
-    margin-right: 10px;
+.appearanceIcons img {
+    filter: invert(0%) sepia(0%) saturate(100%) hue-rotate(0deg);
+    transition: filter 0.3s ease-in-out;
+}
+
+.appearanceIcons img:hover {
+    filter: invert(27%) sepia(87%) saturate(749%) hue-rotate(0deg) brightness(91%) contrast(94%);
 }
 
 .appearanceText {
     font-family: 'Roboto', 'Times New Roman', Times, serif;
     font-weight: 500;
+}
+
+.appearanceWrapper {
+    margin: 7px 0;
 }

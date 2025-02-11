@@ -110,6 +110,35 @@
     align-self: center;
 }
 
+.resetButton {
+    background-color: #333333;
+    padding: 5px 8px;
+    margin-left: 5px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    border: none;
+    margin-bottom: 5px;
+    max-width: 170px;
+    justify-self: center;
+    align-self: center;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-top: 10px;
+}
+
+.successMessage {
+    text-align: center;
+    padding-top: 20px;
+}
+
 /* Responsive adjustments */
 /* Tablet: 2-column layout (Between 600px and 999px) */
 @media screen and (max-width: 999px) {
@@ -169,4 +198,10 @@
 .form .submit:active {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Reduced shadow */
     transform: scale(0.98); /* Slightly smaller on press */
+}
+
+@media screen and (max-width: 769px) {
+    .secondaryTitle {
+        padding-top: 20px;
+    }
 }
