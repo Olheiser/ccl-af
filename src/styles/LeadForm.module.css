@@ -212,29 +212,48 @@
   }
   
 
-  
-  /* Grouping radio buttons and labels inline */
-  .radioGroup {
+/* Grouping radio buttons and labels inline */
+.radioGroup {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Align items to the left */
     gap: 12px; /* Space between Yes/No groups */
     margin-top: 4px;
-  }
+}
 
-  .radioRow {
+.radioRow {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    text-align: left;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center; /* Vertically center radio buttons and labels */
+    gap: 8px; /* Space between radio button and label */
     width: 100%;
-  }
-  
-  /* Ensure label alignment */
-  .radioGroup label {
+}
+
+/* Ensure label alignment */
+.radioGroup label {
     font-size: 16px;
     cursor: pointer;
-  }
-  
+    margin: 0; /* Remove any default margin */
+}
+
+/* Style for the radio buttons */
+.radioGroup input[type="radio"] {
+    margin: 0; /* Remove any default margin */
+}
+
+.radioContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.radioContainer label {
+    padding-left: 10px;
+}
+
+.rightContainer {
+    margin-left: 20px;
+}

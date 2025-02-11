@@ -154,22 +154,30 @@ const LeadForm = () => {
         <div className={styles.radioGroup}>
           <label>Will the Accused be Present?</label>
           <div className={styles.radioRow}>
-            <input type="radio" name="accusedStatus" id="accusedYes" value="Yes" />
-            <label htmlFor="accusedYes">Yes</label>
+            <div className={styles.radioContainer}>
+              <input type="radio" name="accusedStatus" id="accusedYes" value="Yes" />
+              <label htmlFor="accusedYes">Yes</label>
+            </div>
 
-            <input type="radio" name="accusedStatus" id="accusedNo" value="No" />
-            <label htmlFor="accusedNo">No</label>
+            <div className={`${styles.radioContainer} ${styles.rightContainer}`}>
+              <input type="radio" name="accusedStatus" id="accusedNo" value="No" />
+              <label htmlFor="accusedNo">No</label>
+            </div>
           </div>
         </div>
 
         <div className={styles.radioGroup}>
           <label>Has a Designation Been Filed With the Court?</label>
           <div className={styles.radioRow}>
-            <input type="radio" name="designationStatus" id="designationYes" value="Yes" />
-            <label htmlFor="designationYes">Yes</label>
+            <div className={styles.radioContainer}>
+              <input type="radio" name="designationStatus" id="designationYes" value="Yes" />
+              <label htmlFor="designationYes">Yes</label>
+            </div>
 
-            <input type="radio" name="designationStatus" id="designationNo" value="No" />
-            <label htmlFor="designationNo">No</label>
+            <div className={`${styles.radioContainer} ${styles.rightContainer}`}>
+              <input type="radio" name="designationStatus" id="designationNo" value="No" />
+              <label htmlFor="designationNo">No</label>
+            </div>
           </div>
         </div>
 
