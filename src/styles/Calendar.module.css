@@ -102,6 +102,7 @@
     transition: background-color 0.3s ease;
     flex-grow: 1; /* Ensure cells take up all available space */
     overflow: hidden;
+    overflow-y: auto;
   }
   
   .dayCell:hover {
@@ -266,6 +267,25 @@
   .weekdayRow div {
     text-align: right; /* Right-align the text */
     padding-right: 8px; /* Add some padding to the right for spacing */
+  }
+
+  /* Scrollbar */
+  .dayCell::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .dayCell::-webkit-scrollbar-track {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  
+  .dayCell::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+  
+  .dayCell::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 
   @media screen and (min-width: 1200px) {
