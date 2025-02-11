@@ -1,27 +1,29 @@
 // components/DayLabel.tsx
-import { useState } from 'react';
+//import { useState } from 'react';
 import { CourtAppearance } from '@/types';
 import styles from '@/styles/Calendar.module.css';
-import Modal from './Modal';
+//import Modal from './Modal';
 
+/*
 interface DayLabelProps {
   appearance: CourtAppearance;
+}*/
+interface DayLabelProps {
+  appearance: CourtAppearance;
+  onOpenModal: (appearance: CourtAppearance) => void; // Add this prop
 }
 
-export default function DayLabel({ appearance }: DayLabelProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function DayLabel({ appearance, onOpenModal }: DayLabelProps) {
+  //const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // Stop event propagation
+    onOpenModal(appearance); // Notify the parent to open the modal
+  };
 
   return (
-    <>
-      <div className={styles.dayLabel} onClick={(event: React.MouseEvent) => { 
-        event.stopPropagation(); 
-        setIsModalOpen(true); 
-    }}>
-        <span>{appearance.lawyerName} in {appearance.courthouseName} at {appearance.time}</span>
-      </div>
-      {isModalOpen && (
-        <Modal appearance={appearance} onClose={() => setIsModalOpen(false)} />
-      )}
-    </>
+    <div className={styles.dayLabel} onClick={handleClick}>
+      <span>{appearance.lawyerName} in {appearance.courthouseName} at {appearance.time}</span>
+    </div>
   );
 }
