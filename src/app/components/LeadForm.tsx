@@ -3,6 +3,8 @@
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from '@/styles/LeadForm.module.css';
+import emailAddress, { ProvinceEmailAddress } from "../util/emailAddresses";
+//import emailAddress from "../util/emailAddresses";
 
 interface CourtAppearance {
   lawyerName: string;
@@ -76,6 +78,56 @@ const LeadForm = () => {
         { publicKey: "AP4HXf2HPRERJu4fd" }
       );
       console.log('Email sent successfully');
+
+      // ==================================================================================================================
+      // ==================================================================================================================
+      // ==================================================================================================================
+
+      const emailsToSend = emailAddress[appearance.province as keyof ProvinceEmailAddress] || [];
+
+      if (emailsToSend.length > 0) {
+        const emailData = {
+          to: emailsToSend,
+          subject: `${appearance.province}: Appearance Request - ${appearance.lawyerName} | ${appearance.courthouseName} ${appearance.date}`,
+          text: `${appearance.lawyerName} has submitted a new request for appearance at ${appearance.courthouseName} on ${appearance.date} at ${appearance.time}. You can reach ${appearance.lawyerName} at ${appearance.email} for more information.
+
+                Appearance Information:
+
+                Name: ${appearance.lawyerName}
+                Email Address: ${appearance.email}
+                Province: ${appearance.province}
+                Courthouse: ${appearance.courthouseName}
+                Date: ${appearance.date}
+                Time: ${appearance.time}
+                Courtroom: ${appearance.courtroomNumber}
+                Type of Appearance: ${appearance.typeOfAppearance}
+                Will the Accused be Present? ${appearance.accusedStatus}
+                Has a Designation Been Filed With the Court? ${appearance.designationStatus}
+                Message: ${appearance.instructions}
+                
+                To find an agent in ${appearance.province}, go to https://agentfinder.canadacriminallawyer.ca.`,
+          html: `<strong>A new court appearance request has been submitted by ${appearance.lawyerName}.</strong>`,
+        };
+
+        // Call the API route to send the email
+      const response = await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send mass email');
+      }
+
+      console.log('Mass email sent successfully');
+    }
+
+    // ==================================================================================================================
+    // ==================================================================================================================
+    // ==================================================================================================================
 
       // Mark the form as submitted
       setFormSubmitted(true);
