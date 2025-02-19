@@ -181,6 +181,7 @@ const LeadForm = () => {
       list-style: none;
       padding-left: 20px;
       margin-top: 10px;
+      margin-bottom: 20px;
     }
 
     .content ul li {
@@ -189,15 +190,14 @@ const LeadForm = () => {
 
     /* Footer styling */
     .footer {
-      background-color: white;
+      background-color: #8E0000;
       padding: 20px;
       text-align: center;
       border-top: 1px solid #E0E0E0;
     }
 
-    .footer a {
-      color: #bb0000;
-      text-decoration: none;
+    .footer p, .footer a {
+      color: #ffffff;
     }
 
     .footer a:hover {
