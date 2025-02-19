@@ -19,7 +19,8 @@
 /* Ensuring all input elements are styled the same */
 .form input, 
 .form textarea, 
-.form select {
+.form select,
+.form time {
     padding: 11px 15px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -60,7 +61,12 @@
     padding-bottom: 3px;
 }
 
-.form input::placeholder, .form textarea::placeholder, .form select option, .form select:invalid {
+.form input::placeholder, 
+.form textarea::placeholder, 
+.form select option, 
+.form select,  /* <-- This ensures it applies to all select elements */
+.form select:invalid, 
+.form select:disabled {
     font-family: "Optima Nova LT", sans-serif;
     color: #333333;
     font-size: 14px;   
@@ -84,7 +90,8 @@
 .formContainer input[type="password"],
 .formContainer input[type="tel"],
 .formContainer input[type="date"],
-.formContainer select {
+.formContainer select,
+.formContainer input[type="time"] {
     grid-column: span 1;
 }
 

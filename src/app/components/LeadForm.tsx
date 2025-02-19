@@ -102,14 +102,14 @@ const LeadForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email">Requesting Lawyer Email Address</label>
           <input type="email" name="email" id="email" required placeholder="Email Address..." pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
         </div>
 
         <div>
           <label htmlFor="province">Province</label>
-          <select name="province" id="province" required>
-            <option value="" disabled>Province...</option>
+          <select name="province" id="province" required defaultValue="">
+            <option value="" disabled hidden>Select a Province</option>
             <option value="AB">Alberta</option>
             <option value="BC">British Columbia</option>
             <option value="MB">Manitoba</option>
@@ -138,12 +138,25 @@ const LeadForm = () => {
 
         <div>
           <label htmlFor="time">Time</label>
-          <input type="text" name="time" id="time" required placeholder="Time..." />
+          <input type="time" id="time" name="time" min="08:00" max="17:00" required />
         </div>
 
         <div>
           <label htmlFor="courtroom">Courtroom Number</label>
-          <input type="text" name="courtroom" id="courtroom" required placeholder="Courtroom Number..." />
+          <select name="courtroom" id="courtroom" defaultValue="">
+          <option value="" disabled hidden>Select a courtroom number</option>
+            <option value="none">None</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
         </div>
 
         <div>
