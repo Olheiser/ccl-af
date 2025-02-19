@@ -7,9 +7,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Agent Finder - Request an Appearance",
-  description: "Looking for a trusted criminal lawyer in Regina? Nicholas Robinson provides expert criminal defence for all criminal charges. Call now for a free consultation and protect your rights.",
+  description: "This website is used to find an agent to appear on your behalf. ",
   alternates: {
-    canonical: 'https://reginacriminallawyer.ca',
+    canonical: 'https://agentfinder.canadacriminallawyer.ca',
   }
 };
 
