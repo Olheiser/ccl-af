@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from '@/styles/LeadForm.module.css';
 import emailAddress, { ProvinceEmailAddress } from "../util/emailAddresses";
+import provinceName, { ProvinceNames } from "../util/provinceNames";
 //import emailAddress from "../util/emailAddresses";
 
 interface CourtAppearance {
@@ -84,6 +85,7 @@ const LeadForm = () => {
       // ==================================================================================================================
 
       const emailsToSend = emailAddress[appearance.province as keyof ProvinceEmailAddress] || [];
+      const provinceEmail = provinceName[appearance.province as keyof ProvinceNames]
 
       if (emailsToSend.length > 0) {
         const emailData = {
@@ -106,7 +108,154 @@ const LeadForm = () => {
                 Message: ${appearance.instructions}
                 
                 To find an agent in ${appearance.province}, go to https://agentfinder.canadacriminallawyer.ca.`,
-          html: `<strong>A new court appearance request has been submitted by ${appearance.lawyerName}.</strong>`,
+          html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Request for Appearance</title>
+  <style>
+    /* Reset styles for email clients */
+    body, p, h1, h2, ul, li {
+      margin: 0;
+      padding: 0;
+      font-family: Roboto, sans-serif;
+    }
+
+    /* Body background */
+    body {
+      background-color: #F1F4F6;
+      padding: 20px 0;
+    }
+
+    /* Container for the email content */
+    .email-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #FDFDFD;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Red bar at the top */
+    .red-bar {
+      height: 40px;
+      background-color: #bb0000;
+    }
+
+    /* Logo styling */
+    .logo {
+      display: block;
+      margin: 20px auto;
+      max-height: 130px;
+      width: auto;
+    }
+
+    /* Heading styling */
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      margin: 20px 0;
+      padding-top: 10px;
+    }
+    
+    h2 {
+      padding-top: 30px;
+    }
+
+    /* Content styling */
+    .content {
+      padding: 0 40px 20px 40px;
+      font-family: Roboto, sans-serif;
+      color: #333;
+      line-height: 22px;
+    }
+
+    .content strong {
+      color: #000;
+    }
+
+    .content ul {
+      list-style: none;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .content ul li {
+      line-height: 22px;
+    }
+
+    /* Footer styling */
+    .footer {
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #E0E0E0;
+    }
+
+    .footer a {
+      color: #bb0000;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <!-- Red bar -->
+    <div class="red-bar"></div>
+
+    <!-- Logo -->
+    <a href="https://agentfinder.canadacriminallawyer.ca"><img src="https://imagedelivery.net/8au6u53Ph6mHP5o5AhlVXQ/f2494350-a48d-4817-3ac0-48679636d100/public" alt="Logo" class="logo"></a>
+
+    <!-- Heading -->
+    <h1>New Request for Appearance</h1>
+
+    <!-- Content -->
+    <div class="content">
+      <p>
+        <strong>${appearance.lawyerName}</strong> has submitted a new request for appearance at 
+        <strong>${appearance.courthouseName}</strong> on 
+        <strong>${appearance.date}</strong> at 
+        <strong>${appearance.time}</strong>. You can reach 
+        <strong>${appearance.lawyerName}</strong> at 
+        <strong><a href="mailto:${appearance.email}" style="color: #bb0000; text-decoration: none;">${appearance.email}</a></strong> 
+        for more information.
+      </p>
+
+      <h2>Appearance Information:</h2>
+
+      <ul>
+        <li><strong>Name:</strong> ${appearance.lawyerName}</li>
+        <li><strong>Email Address:</strong> ${appearance.email}</li>
+        <li><strong>Province:</strong> ${appearance.province}</li>
+        <li><strong>Courthouse:</strong> ${appearance.courthouseName}</li>
+        <li><strong>Date:</strong> ${appearance.date}</li>
+        <li><strong>Time:</strong> ${appearance.time}</li>
+        <li><strong>Courtroom:</strong> ${appearance.courtroomNumber}</li>
+        <li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>
+        <li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>
+        <li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>
+        <li><strong>Instructions:</strong> ${appearance.instructions}</li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        <strong>To find an agent in ${provinceEmail}, go to 
+        <a href="https://agentfinder.canadacriminallawyer.ca">https://agentfinder.canadacriminallawyer.ca</a>.
+        </strong>
+      </p>
+    </div>
+  </div>
+</body>
+</html>`,
         };
 
         // Call the API route to send the email
