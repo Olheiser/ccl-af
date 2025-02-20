@@ -358,7 +358,15 @@ const LeadForm = () => {
 
         <div className={styles.dateContainer}>
           <label htmlFor="date">Date of Appearance</label>
-          <input type="date" name="date" id="date" required placeholder="Date of Appearance..." min={new Date().toISOString().split("T")[0]}/>
+          <input type="date" name="date" id="date" required placeholder="Date of Appearance..." min={new Date().toISOString().split("T")[0]} 
+          onChange={(e) => {
+            const selectedDate = new Date(e.target.value);
+            const day = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+            if (day === 5 || day === 6) {
+              alert("Weekends are not allowed. Please select a weekday.");
+              e.target.value = ""; // Reset input
+            }
+          }}/>
         </div>
 
         <div>
