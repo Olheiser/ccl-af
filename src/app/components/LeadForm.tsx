@@ -21,6 +21,25 @@ interface CourtAppearance {
   instructions: string;
 }
 
+function formatTimeTo12Hour(time: string): string {
+  const [hour, minute] = time.split(':');
+  let hours = parseInt(hour, 10);
+  const minutes = parseInt(minute, 10);
+
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+
+  const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+  return formattedTime;
+}
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+}
+
 const LeadForm = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -226,8 +245,8 @@ const LeadForm = () => {
       <p>
         <strong>${appearance.lawyerName}</strong> has submitted a new request for appearance at 
         <strong>${appearance.courthouseName}</strong> on 
-        <strong>${appearance.date}</strong> at 
-        <strong>${appearance.time}</strong>. You can reach 
+        <strong>${formatDate(appearance.date)}</strong> at 
+        <strong>${formatTimeTo12Hour(appearance.time)}</strong>. You can reach 
         <strong>${appearance.lawyerName}</strong> at 
         <strong><a href="mailto:${appearance.email}" style="color: #bb0000; text-decoration: none;">${appearance.email}</a></strong> 
         for more information.
@@ -240,8 +259,8 @@ const LeadForm = () => {
         <li><strong>Email Address:</strong> ${appearance.email}</li>
         <li><strong>Province:</strong> ${appearance.province}</li>
         <li><strong>Courthouse:</strong> ${appearance.courthouseName}</li>
-        <li><strong>Date:</strong> ${appearance.date}</li>
-        <li><strong>Time:</strong> ${appearance.time}</li>
+        <li><strong>Date:</strong> ${formatDate(appearance.date)}</li>
+        <li><strong>Time:</strong> ${formatTimeTo12Hour(appearance.time)}</li>
         <li><strong>Courtroom:</strong> ${appearance.courtroomNumber}</li>
         ${appearance.typeOfAppearance && `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>`}
         ${appearance.accusedStatus && `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>`}
