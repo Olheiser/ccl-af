@@ -154,7 +154,7 @@ const LeadForm = () => {
       background-color: #FDFDFD;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
     }
 
     /* Red bar at the top */
