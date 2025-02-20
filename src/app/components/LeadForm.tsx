@@ -185,8 +185,16 @@ const LeadForm = () => {
       font-fize: 20px;
     }
 
-    p, li, a {
-      font-size: 14px;
+    p {
+      font-size: 16px;
+    }
+
+    li {
+      font-size: 16px;
+    }
+
+    a {
+      font-size: 16px;
     }
 
     /* Content styling */
