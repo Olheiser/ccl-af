@@ -148,14 +148,14 @@ const LeadForm = () => {
     .logo {
       display: block;
       margin: 20px auto;
-      max-height: 130px;
+      max-height: 110px;
       width: auto;
     }
 
     /* Heading styling */
     h1 {
       text-align: center;
-      font-size: 24px;
+      font-size: 26px;
       color: #333;
       margin: 20px 0;
       padding-top: 10px;
@@ -163,6 +163,11 @@ const LeadForm = () => {
     
     h2 {
       padding-top: 30px;
+      font-fize: 20px;
+    }
+
+    p, li, a {
+      font-size: 14px;
     }
 
     /* Content styling */
@@ -238,10 +243,10 @@ const LeadForm = () => {
         <li><strong>Date:</strong> ${appearance.date}</li>
         <li><strong>Time:</strong> ${appearance.time}</li>
         <li><strong>Courtroom:</strong> ${appearance.courtroomNumber}</li>
-        <li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>
-        <li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>
-        <li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>
-        <li><strong>Instructions:</strong> ${appearance.instructions}</li>
+        ${appearance.typeOfAppearance && `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>`}
+        ${appearance.accusedStatus && `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>`}
+        ${appearance.designationStatus && `<li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>`}
+        ${appearance.instructions && `<li><strong>Instructions:</strong> ${appearance.instructions}</li>`}
       </ul>
     </div>
 
