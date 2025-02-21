@@ -4,12 +4,15 @@ import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from '@/styles/LeadForm.module.css';
 import emailAddress, { ProvinceEmailAddress } from "../util/emailAddresses";
-import provinceName, { ProvinceNames } from "../util/provinceNames";
+import { appearanceEmailTemplate } from "../util/appearanceEmailTemplate";
+import confirmationEmailTemplate from "../util/confirmationEmailTemplate";
 //import emailAddress from "../util/emailAddresses";
 
 interface CourtAppearance {
   lawyerName: string;
   email: string;
+  phone: string;
+  contactMethod: string;
   province: string;
   courthouseName: string;
   date: string;
@@ -19,25 +22,6 @@ interface CourtAppearance {
   accusedStatus: string;
   designationStatus: string;
   instructions: string;
-}
-
-function formatTimeTo12Hour(time: string): string {
-  const [hour, minute] = time.split(':');
-  let hours = parseInt(hour, 10);
-  const minutes = parseInt(minute, 10);
-
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-
-  const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-  return formattedTime;
-}
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
 }
 
 const LeadForm = () => {
@@ -74,6 +58,8 @@ const LeadForm = () => {
     const appearance: CourtAppearance = {
       lawyerName: formData.get('name') as string,
       email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      contactMethod: formData.get('contactMethod') as string,
       province: formData.get('province') as string,
       courthouseName: formData.get('courthouse') as string,
       date: formData.get('date') as string,
@@ -104,7 +90,6 @@ const LeadForm = () => {
       // ==================================================================================================================
 
       const emailsToSend = emailAddress[appearance.province as keyof ProvinceEmailAddress] || [];
-      const provinceEmail = provinceName[appearance.province as keyof ProvinceNames]
 
       if (emailsToSend.length > 0) {
         const emailData = {
@@ -114,194 +99,36 @@ const LeadForm = () => {
 
                 Appearance Information:
 
-                Name: ${appearance.lawyerName}
-                Email Address: ${appearance.email}
+                Requesting Lawyer's Name: ${appearance.lawyerName}
+                Requesting Lawyer's Email Address: ${appearance.email}
+                Requesting Lawyer's Phone Number: ${appearance.phone}
+                Preferred Contact Method: ${appearance.contactMethod}
                 Province: ${appearance.province}
                 Courthouse: ${appearance.courthouseName}
-                Date: ${appearance.date}
+                Date of Appearance: ${appearance.date}
                 Time: ${appearance.time}
-                Courtroom: ${appearance.courtroomNumber}
+                Courtroom Number: ${appearance.courtroomNumber}
                 Type of Appearance: ${appearance.typeOfAppearance}
                 Will the Accused be Present? ${appearance.accusedStatus}
                 Has a Designation Been Filed With the Court? ${appearance.designationStatus}
                 Message: ${appearance.instructions}
                 
                 To find an agent in ${appearance.province}, go to https://agentfinder.canadacriminallawyer.ca.`,
-          html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Request for Appearance</title>
-  <style>
-    /* Reset styles for email clients */
-    body, p, h1, h2, ul, li {
-      margin: 0;
-      padding: 0;
-      font-family: Roboto, sans-serif;
-    }
-
-    /* Body background */
-    body {
-      background-color: #F1F4F6;
-      padding: 20px 0;
-    }
-
-    /* Container for the email content */
-    .email-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #FDFDFD;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Red bar at the top */
-    .red-bar {
-      height: 40px;
-      background-color: #bb0000;
-    }
-
-    /* Logo styling */
-    .logo {
-      display: block;
-      margin: 20px auto;
-      max-height: 110px;
-      width: auto;
-    }
-
-    /* Heading styling */
-    h1 {
-      text-align: center;
-      font-size: 26px;
-      color: #333;
-      margin: 20px 0;
-      padding-top: 10px;
-    }
-    
-    h2 {
-      padding-top: 30px;
-      font-fize: 20px;
-    }
-
-    p {
-      font-size: 16px;
-    }
-
-    li {
-      font-size: 16px;
-    }
-
-    a {
-      font-size: 16px;
-    }
-
-    /* Content styling */
-    .content {
-      padding: 0 40px 20px 40px;
-      font-family: Roboto, sans-serif;
-      color: #333;
-      line-height: 22px;
-    }
-
-    .content strong {
-      color: #000;
-    }
-
-    .content ul {
-      list-style: none;
-      padding-left: 20px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-
-    .content ul li {
-      line-height: 22px;
-    }
-
-    /* Footer styling */
-    .footer {
-      background-color: #8E0000;
-      padding: 20px;
-      text-align: center;
-      border-top: 1px solid #E0E0E0;
-    }
-
-    .footer p, .footer a {
-      color: #ffffff;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <div class="email-container">
-    <!-- Red bar -->
-    <div class="red-bar"></div>
-
-    <!-- Logo -->
-    <a href="https://agentfinder.canadacriminallawyer.ca"><img src="https://imagedelivery.net/8au6u53Ph6mHP5o5AhlVXQ/f2494350-a48d-4817-3ac0-48679636d100/public" alt="Logo" class="logo"></a>
-
-    <!-- Heading -->
-    <h1>New Request for Appearance</h1>
-
-    <!-- Content -->
-    <div class="content">
-      <p>
-        <strong>${appearance.lawyerName}</strong> has submitted a new request for appearance at 
-        <strong>${appearance.courthouseName}</strong> on 
-        <strong>${formatDate(appearance.date)}</strong> at 
-        <strong>${formatTimeTo12Hour(appearance.time)}</strong>. You can reach 
-        <strong>${appearance.lawyerName}</strong> at 
-        <strong><a href="mailto:${appearance.email}" style="color: #bb0000; text-decoration: none;">${appearance.email}</a></strong> 
-        for more information.
-      </p>
-
-      <h2>Appearance Information:</h2>
-
-      <ul>
-        <li><strong>Name:</strong> ${appearance.lawyerName}</li>
-        <li><strong>Email Address:</strong> ${appearance.email}</li>
-        <li><strong>Province:</strong> ${appearance.province}</li>
-        <li><strong>Courthouse:</strong> ${appearance.courthouseName}</li>
-        <li><strong>Date:</strong> ${formatDate(appearance.date)}</li>
-        <li><strong>Time:</strong> ${formatTimeTo12Hour(appearance.time)}</li>
-        <li><strong>Courtroom:</strong> ${appearance.courtroomNumber}</li>
-        ${appearance.typeOfAppearance && `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>`}
-        ${appearance.accusedStatus && `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>`}
-        ${appearance.designationStatus && `<li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>`}
-        ${appearance.instructions && `<li><strong>Instructions:</strong> ${appearance.instructions}</li>`}
-      </ul>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <p>
-        <strong>To find an agent in ${provinceEmail}, go to 
-        <a href="https://agentfinder.canadacriminallawyer.ca">https://agentfinder.canadacriminallawyer.ca</a>.
-        </strong>
-      </p>
-    </div>
-  </div>
-</body>
-</html>`,
+          html: appearanceEmailTemplate(appearance),
         };
 
         // Call the API route to send the email
-      const response = await fetch('/api/sendEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(emailData),
-      });
+        const response = await fetch('/api/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(emailData),
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to send mass email');
-      }
+        if (!response.ok) {
+          throw new Error('Failed to send mass email');
+        }
 
       console.log('Mass email sent successfully');
     }
@@ -309,6 +136,26 @@ const LeadForm = () => {
     // ==================================================================================================================
     // ==================================================================================================================
     // ==================================================================================================================
+
+    const confirmationEmailData = {
+      to: appearance.email,
+      subject: `Confirmation of Appearance Request - ${appearance.lawyerName} at ${appearance.courthouseName} on ${appearance.date}`,
+      text: `Dear ${appearance.lawyerName},\n\nYour request for appearance at ${appearance.courthouseName} on ${appearance.date} at ${appearance.time} has been received. Thank you, The Agent Finder Team.`,
+      html: confirmationEmailTemplate(appearance),
+    };
+
+    const confirmationResponse = await fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(confirmationEmailData),
+    });
+
+    if (!confirmationResponse.ok) {
+      throw new Error('Failed to send confirmation email');
+    }
+
 
       // Mark the form as submitted
       setFormSubmitted(true);
@@ -330,13 +177,26 @@ const LeadForm = () => {
       <h2 className={styles.secondaryTitle}>Appearance Information</h2>
       <div className={styles.formContainer}>
         <div>
-          <label htmlFor="fullName">Requesting Lawyer Name</label>
+          <label htmlFor="fullName">Requesting Lawyer&apos;s Name</label>
           <input type="text" name="name" id="name" required placeholder="Requesting Lawyer Name..." />
         </div>
 
         <div>
-          <label htmlFor="email">Requesting Lawyer Email Address</label>
+          <label htmlFor="email">Requesting Lawyer&apos;s Email Address</label>
           <input type="email" name="email" id="email" required placeholder="Email Address..." pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+        </div>
+
+        <div>
+          <label htmlFor="phone">Requesting Lawyer&apos;s Phone Number</label>
+          <input type="tel" name="phone" id="phone" placeholder="Phone Number..." />
+        </div>
+
+        <div>
+          <label htmlFor="contactMethod">Preferred Contact Method</label>
+          <select name="contactMethod" id="contactMethod" defaultValue="Email">
+            <option value="Email">Email</option>
+            <option value="Phone">Phone</option>
+          </select>
         </div>
 
         <div>
@@ -384,20 +244,7 @@ const LeadForm = () => {
 
         <div>
           <label htmlFor="courtroom">Courtroom Number</label>
-          <select name="courtroom" id="courtroom" defaultValue="">
-          <option value="" disabled hidden>Select a courtroom number</option>
-            <option value="none">None</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
+          <input type="text" name="courtroom" id="courtroom" placeholder="Courtroom Number..." />
         </div>
 
         <div>
@@ -405,7 +252,7 @@ const LeadForm = () => {
           <input type="text" name="appearanceType" id="appearanceType" placeholder="Type of Appearance..." />
         </div>
 
-        <div className={styles.radioGroup}>
+        <div>
           <label>Will the Accused be Present?</label>
           <div className={styles.radioRow}>
             <div className={styles.radioContainer}>
@@ -420,7 +267,7 @@ const LeadForm = () => {
           </div>
         </div>
 
-        <div className={styles.radioGroup}>
+        <div>
           <label>Has a Designation Been Filed With the Court?</label>
           <div className={styles.radioRow}>
             <div className={styles.radioContainer}>
@@ -438,7 +285,8 @@ const LeadForm = () => {
       </div>
 
       <div>
-        <label htmlFor="message">Instructions</label>
+        <label htmlFor="message">Instructions (for each of the accused)</label><br />
+        <span className={styles.instructionsSublabel}><em>Provide instructions such as adjourn for disclosure, adjourn for instruction, and adjourn for discussions with crown.</em></span>
         <textarea name="message" id="message" placeholder="Your Message..."></textarea>
       </div>
 

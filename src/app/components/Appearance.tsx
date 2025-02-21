@@ -3,6 +3,7 @@
 import styles from "@/styles/Appearance.module.css";
 import Image from "next/image";
 import EmailIcon from "../../../public/email.webp"
+import { formatDate, formatTimeTo12Hour } from "../util/util";
 
 import { useState } from 'react';
 import RequestModalProps from "./Calendar/Modal";
@@ -12,6 +13,8 @@ import RequestModalProps from "./Calendar/Modal";
       id: string;
       lawyerName: string;
       email: string;
+      phone: string;
+      contactMethod: string;
       date: string;
       time: string;
       courthouseName: string;
@@ -25,18 +28,11 @@ import RequestModalProps from "./Calendar/Modal";
   export default function Appearance({ appearance }: AppearanceProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const formattedDate = new Date(`${appearance.date}T00:00:00`).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
-
     return (
       <>
       <div className={styles.appearanceWrapper} onClick={() => setIsModalOpen(true)}>
         <div className={styles.appearanceText}>
-          {appearance.lawyerName} <span className={styles.appearanceBoiler}>needs an agent for</span> {formattedDate} <span className={styles.appearanceBoiler}>at</span> {appearance.time} <span className={styles.appearanceBoiler}>in</span> {appearance.courthouseName}<span className={styles.appearanceBoiler}>,</span> {appearance.province}
+          {appearance.lawyerName} <span className={styles.appearanceBoiler}>needs an agent for</span> {formatDate(appearance.date)} <span className={styles.appearanceBoiler}>at</span> {formatTimeTo12Hour(appearance.time)} <span className={styles.appearanceBoiler}>in</span> {appearance.courthouseName}<span className={styles.appearanceBoiler}>,</span> {appearance.province}
         </div>
         <div className={styles.appearanceIcons}>
           <a href={`mailto:${appearance.email}`}>

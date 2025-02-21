@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/RequestFeed.module.css";
 import Appearance from "../components/Appearance";
 import Filter from "../components/Filter";
+import { CourtAppearance } from "@/types";
 
-  interface CourtAppearance {
+  /*interface CourtAppearance {
     id: string;
     lawyerName: string;
     email: string;
@@ -16,7 +17,7 @@ import Filter from "../components/Filter";
     typeOfAppearance: string;
     instructions: string;
     province: string;
-  }
+  }*/
   
   export default function Page() {
     const [appearances, setAppearances] = useState<CourtAppearance[]>([]);
@@ -89,7 +90,7 @@ import Filter from "../components/Filter";
             <div className={styles.loader}></div>
           ) : (
             appearances.map((appearance) => (
-              <Appearance key={appearance.id} appearance={appearance} />
+              <Appearance key={appearance.id!} appearance={appearance as Required<CourtAppearance>} />
             ))
           )}
           {appearances.length > 15 && (

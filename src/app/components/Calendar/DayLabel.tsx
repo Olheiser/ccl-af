@@ -2,6 +2,7 @@
 //import { useState } from 'react';
 import { CourtAppearance } from '@/types';
 import styles from '@/styles/Calendar.module.css';
+import { formatTimeTo12Hour } from '@/app/util/util';
 //import Modal from './Modal';
 
 /*
@@ -23,7 +24,7 @@ export default function DayLabel({ appearance, onOpenModal }: DayLabelProps) {
 
   return (
     <div className={styles.dayLabel} onClick={handleClick}>
-      <span>{appearance.lawyerName} in {appearance.courthouseName} at {appearance.time}</span>
+      <span>{appearance.lawyerName} in {appearance.courthouseName} at {formatTimeTo12Hour(appearance.time)}</span>
     </div>
   );
 }

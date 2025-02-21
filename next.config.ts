@@ -2,7 +2,7 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: '/(.*)', // Apply to all routes
         headers: [
           {
             key: 'X-Content-Type-Options',
@@ -16,10 +16,20 @@ module.exports = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "default-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com; " +
+              "script-src 'self' 'unsafe-eval' https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com; " +
+              "connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com; " +
+              "img-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com data:; " +
+              "style-src 'self' 'unsafe-inline' https://*.googleapis.com; " +
+              "font-src 'self' https://*.gstatic.com;",
+          },
         ],
       },
       {
-        source: '/sw.js',
+        source: '/sw.js', // Apply to the service worker file
         headers: [
           {
             key: 'Content-Type',
@@ -38,11 +48,3 @@ module.exports = {
     ];
   },
 };
-
-/* import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-   config options here 
-};
-
-export default nextConfig;*/

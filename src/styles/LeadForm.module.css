@@ -305,3 +305,15 @@
     width: 100%; /* Take full width */
     max-width: 100px; /* Limit maximum width */
 }
+
+.instructionsSublabel {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #414a4c;
+}
+
+/* Updating Radio Positioning */
+.radioRow {
+    margin-top: 10px;
+}

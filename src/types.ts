@@ -1,8 +1,10 @@
 // src/types.ts
 export type CourtAppearance = {
-  id: string;
+  id?: string;
   lawyerName: string;
   email: string;
+  phone?: string;
+  contactMethod: string;
   date: string;
   time: string;
   courthouseName: string;
