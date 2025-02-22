@@ -140,7 +140,7 @@ export const appearanceEmailTemplate = (appearance: CourtAppearance) => {
     <div class="content">
       <p>
         <strong>${appearance.lawyerName}</strong> has submitted a new request for appearance at 
-        <strong>${appearance.courthouseName} ${getCourtroomWithPrefix(appearance.courtroomNumber)}}</strong> on 
+        <strong>${appearance.courthouseName} ${getCourtroomWithPrefix(appearance.courtroomNumber)}</strong> on 
         <strong>${formatDate(appearance.date)}</strong> at 
         <strong>${formatTimeTo12Hour(appearance.time)}</strong>.
       </p>

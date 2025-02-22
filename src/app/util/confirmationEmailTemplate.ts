@@ -149,7 +149,7 @@ const confirmationEmailTemplate = (appearance: CourtAppearance) => {
     <!-- Content -->
     <div class="content">
       <p>Dear ${appearance.lawyerName},</p></br>
-      <p class="introP">Your request for appearance at <strong>${appearance.courthouseName} ${getCourtroomWithPrefix(appearance.courtroomNumber)}}</strong> on <strong>${formatDate(appearance.date)}</strong> at <strong>${formatTimeTo12Hour(appearance.time)}</strong> has been received.</p>
+      <p class="introP">Your request for appearance at <strong>${appearance.courthouseName} ${getCourtroomWithPrefix(appearance.courtroomNumber)}</strong> on <strong>${formatDate(appearance.date)}</strong> at <strong>${formatTimeTo12Hour(appearance.time)}</strong> has been received.</p>
       <p class="thankP">Thank you,</p>
       <p>The Agent Finder Team</p>
 
