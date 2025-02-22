@@ -14,7 +14,7 @@ export default function RequestModal({ appearance, onClose }: RequestModalProps)
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose}>X</button>
-        <h3>{appearance.lawyerName} in {appearance.courthouseName} at {appearance.time}</h3> {/* Use caseName instead of title */}
+        <h3>{appearance.lawyerName} in {appearance.courthouseName} {getCourtroomWithPrefix(appearance.courtroomNumber)} at {appearance.time}</h3> {/* Use caseName instead of title */}
         <p><strong>Courthouse:</strong> {appearance.courthouseName}, {appearance.province}</p>
         {appearance.courtroomNumber &&<p><strong>Courtroom:</strong> {getCourtroomWithPrefix(appearance.courtroomNumber)}</p>}
         <p><strong>Appearance Date:</strong> {formatDate(appearance.date)} at {formatTimeTo12Hour(appearance.time)}</p>
