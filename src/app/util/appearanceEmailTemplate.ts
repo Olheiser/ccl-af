@@ -1,5 +1,5 @@
 import { CourtAppearance } from "@/types";
-import { formatDate, formatTimeTo12Hour } from "./util";
+import { formatDate, formatTimeTo12Hour, getCourtroomWithPrefix } from "./util";
 import provinceName, { ProvinceNames } from "./provinceNames";
 
 export const appearanceEmailTemplate = (appearance: CourtAppearance) => {
@@ -140,7 +140,7 @@ export const appearanceEmailTemplate = (appearance: CourtAppearance) => {
     <div class="content">
       <p>
         <strong>${appearance.lawyerName}</strong> has submitted a new request for appearance at 
-        <strong>${appearance.courthouseName}</strong> on 
+        <strong>${appearance.courthouseName} ${getCourtroomWithPrefix(appearance.courtroomNumber)}}</strong> on 
         <strong>${formatDate(appearance.date)}</strong> at 
         <strong>${formatTimeTo12Hour(appearance.time)}</strong>.
       </p>
@@ -154,9 +154,9 @@ export const appearanceEmailTemplate = (appearance: CourtAppearance) => {
         <li><strong>Preferred Contact Method:</strong> ${appearance.contactMethod}</li>
         <li><strong>Province:</strong> ${appearance.province}</li>
         <li><strong>Courthouse:</strong> ${appearance.courthouseName}</li>
+         ${appearance.courtroomNumber && `<li><strong>Courtroom:</strong> ${getCourtroomWithPrefix(appearance.courtroomNumber)}</li>`}
         <li><strong>Date of Appearance:</strong> ${formatDate(appearance.date)}</li>
         <li><strong>Time:</strong> ${formatTimeTo12Hour(appearance.time)}</li>
-        ${appearance.courtroomNumber && `<li><strong>Courtroom:</strong> ${appearance.courtroomNumber}</li>`}
         ${appearance.typeOfAppearance && `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>`}
         ${appearance.accusedStatus && `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>`}
         ${appearance.designationStatus && `<li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>`}

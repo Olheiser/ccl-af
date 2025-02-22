@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import styles from '@/styles/Calendar.module.css';
 import { CourtAppearance } from '@/types';
-import { formatDate } from '@/app/util/util';
-import { formatTimeTo12Hour } from '@/app/util/util';
+import { formatDate, formatTimeTo12Hour, getCourtroomWithPrefix } from '@/app/util/util';
 
 interface DayModalProps {
   appearances: CourtAppearance[];
@@ -33,13 +32,13 @@ export default function DayModal({ appearances, onClose }: DayModalProps) {
               onClick={() => handleAccordionClick(appearance.id!)}
             >
               <span>
-                {appearance.lawyerName} in {appearance.courthouseName} at {appearance.time} ▿
+                {appearance.lawyerName} in {appearance.courthouseName} {getCourtroomWithPrefix(appearance.courtroomNumber)} at {appearance.time} ▿
               </span>
             </div>
             {openAccordionId === appearance.id && (
               <div className={styles.accordionContent}>
                 <p><strong>Courthouse:</strong> {appearance.courthouseName}, {appearance.province}</p>
-                {appearance.courtroomNumber &&<p><strong>Courtroom:</strong> {appearance.courtroomNumber}</p>}
+                {appearance.courtroomNumber &&<p><strong>Courtroom:</strong> {getCourtroomWithPrefix(appearance.courtroomNumber)}</p>}
                 <p><strong>Appearance Date:</strong> {formatDate(appearance.date)} at {formatTimeTo12Hour(appearance.time)}</p>
                 <p><strong>Requesting Lawyer:</strong> {appearance.lawyerName}</p>
                 <p><strong>Requesting Lawyer&apos;s Email:</strong> <a className={styles.modalEmail} href={`mailto:${appearance.email}`}>{appearance.email}</a></p>

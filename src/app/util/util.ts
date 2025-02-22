@@ -44,10 +44,22 @@ export function formatTimeTo12Hour(time: string): string {
     return formattedTime;
   }
 
-  export function getCourtroomPrefix(courtroomNumber: string | undefined): string {
-    // Check if courtroomNumber is defined and is a string of digits
-    if (courtroomNumber && /^\d+$/.test(courtroomNumber)) {
-      return "#";
-    }
+export function getCourtroomWithPrefix(courtroomNumber: string | undefined): string {
+  // If courtroomNumber is undefined, return an empty string
+  if (courtroomNumber === undefined) {
     return "";
   }
+
+  // If courtroomNumber is a string that contains only numbers, return "#"
+  if (typeof courtroomNumber === "string" && /^\d+$/.test(courtroomNumber)) {
+    return `#${courtroomNumber}`;
+  }
+
+  // If courtroomNumber is a string but not only numbers, return it as-is
+  if (typeof courtroomNumber === "string") {
+    return courtroomNumber;
+  }
+
+  // If courtroomNumber is not a string, return it as-is
+  return courtroomNumber;
+}

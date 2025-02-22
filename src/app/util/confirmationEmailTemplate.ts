@@ -1,5 +1,5 @@
 import { CourtAppearance } from "@/types";
-import { formatDate } from "./util";
+import { formatDate, getCourtroomWithPrefix } from "./util";
 import { formatTimeTo12Hour } from "./util";
 import provinceName, { ProvinceNames } from "./provinceNames";
 
@@ -149,7 +149,7 @@ const confirmationEmailTemplate = (appearance: CourtAppearance) => {
     <!-- Content -->
     <div class="content">
       <p>Dear ${appearance.lawyerName},</p></br>
-      <p class="introP">Your request for appearance at <strong>${appearance.courthouseName}</strong> on <strong>${formatDate(appearance.date)}</strong> at <strong>${formatTimeTo12Hour(appearance.time)}</strong> has been received.</p>
+      <p class="introP">Your request for appearance at <strong>${appearance.courthouseName} ${getCourtroomWithPrefix(appearance.courtroomNumber)}}</strong> on <strong>${formatDate(appearance.date)}</strong> at <strong>${formatTimeTo12Hour(appearance.time)}</strong> has been received.</p>
       <p class="thankP">Thank you,</p>
       <p>The Agent Finder Team</p>
 
@@ -162,9 +162,9 @@ const confirmationEmailTemplate = (appearance: CourtAppearance) => {
         <li><strong>Preferred Contact Method:</strong> ${appearance.contactMethod}</li>
         <li><strong>Province:</strong> ${appearance.province}</li>
         <li><strong>Courthouse:</strong> ${appearance.courthouseName}</li>
+        ${appearance.courtroomNumber && `<li><strong>Courtroom:</strong> ${getCourtroomWithPrefix(appearance.courtroomNumber)}${appearance.courtroomNumber}</li>`}
         <li><strong>Date of Appearance:</strong> ${formatDate(appearance.date)}</li>
         <li><strong>Time:</strong> ${formatTimeTo12Hour(appearance.time)}</li>
-        ${appearance.courtroomNumber && `<li><strong>Courtroom:</strong> ${appearance.courtroomNumber}</li>`}
         ${appearance.typeOfAppearance && `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>`}
         ${appearance.accusedStatus && `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>`}
         ${appearance.designationStatus && `<li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>`}

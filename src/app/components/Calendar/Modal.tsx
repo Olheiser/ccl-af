@@ -1,8 +1,7 @@
 // components/Modal.tsx
 import styles from '@/styles/Calendar.module.css';
 import { CourtAppearance } from '@/types';
-import { formatDate } from '@/app/util/util';
-import { formatTimeTo12Hour } from '@/app/util/util';
+import { formatDate, formatTimeTo12Hour, getCourtroomWithPrefix } from '@/app/util/util';
 
 interface ModalProps {
   appearance: CourtAppearance; // Use the CourtAppearance type
@@ -18,7 +17,7 @@ export default function Modal({ appearance, onClose }: ModalProps) {
         <button onClick={onClose}>X</button>
         <h3>{appearance.lawyerName} in {appearance.courthouseName} at {formatTimeTo12Hour(appearance.time)}</h3> {/* Use caseName instead of title */}
         <p><strong>Courthouse:</strong> {appearance.courthouseName}, {appearance.province}</p>
-        {appearance.courtroomNumber && <p><strong>Courtroom:</strong> {appearance.courtroomNumber}</p>}
+        {appearance.courtroomNumber && <p><strong>Courtroom:</strong> {getCourtroomWithPrefix(appearance.courtroomNumber)}</p>}
         <p><strong>Appearance Date:</strong> {formatDate(appearance.date)} at {formatTimeTo12Hour(appearance.time)}</p>
         <p><strong>Requesting Lawyer:</strong> {appearance.lawyerName}</p>
         <p><strong>Requesting Lawyer&apos;s Email:</strong> <a className={styles.modalEmail} href={`mailto:${appearance.email}`}>{appearance.email}</a></p>
