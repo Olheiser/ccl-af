@@ -158,17 +158,17 @@ const confirmationEmailTemplate = (appearance: CourtAppearance) => {
       <ul>
         <li><strong>Requesting Lawyer's Name:</strong> ${appearance.lawyerName}</li>
         <li><strong>Requesting Lawyer's Email Address:</strong> ${appearance.email}</li>
-        ${appearance.phone && `<li><strong>Requesting Lawyer's Phone Number:</strong> ${appearance.phone}</li>`}
+        ${appearance.phone ? `<li><strong>Requesting Lawyer's Phone Number:</strong> ${appearance.phone}</li>` : ""}
         <li><strong>Preferred Contact Method:</strong> ${appearance.contactMethod}</li>
         <li><strong>Province:</strong> ${appearance.province}</li>
         <li><strong>Courthouse:</strong> ${appearance.courthouseName}</li>
-        ${appearance.courtroomNumber && `<li><strong>Courtroom:</strong> ${getCourtroomWithPrefix(appearance.courtroomNumber)}${appearance.courtroomNumber}</li>`}
+        ${appearance.courtroomNumber ? `<li><strong>Courtroom:</strong> ${getCourtroomWithPrefix(appearance.courtroomNumber)}${appearance.courtroomNumber}</li>` : ""}
         <li><strong>Date of Appearance:</strong> ${formatDate(appearance.date)}</li>
         <li><strong>Time:</strong> ${formatTimeTo12Hour(appearance.time)}</li>
-        ${appearance.typeOfAppearance && `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>`}
-        ${appearance.accusedStatus && `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>`}
-        ${appearance.designationStatus && `<li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>`}
-        ${appearance.instructions && `<li><strong>Instructions:</strong> ${appearance.instructions}</li>`}
+        ${appearance.typeOfAppearance ? `<li><strong>Type of Appearance:</strong> ${appearance.typeOfAppearance}</li>` : ""}
+        ${appearance.accusedStatus ? `<li><strong>Will the Accused be Present?</strong> ${appearance.accusedStatus}</li>` : ""}
+        ${appearance.designationStatus ? `<li><strong>Has a Designation Been Filed With the Court?</strong> ${appearance.designationStatus}</li>` : ""}
+        ${appearance.instructions ? `<li><strong>Instructions:</strong> ${appearance.instructions}</li>` : ""}
       </ul>
     </div>
 
