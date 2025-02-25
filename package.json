@@ -16,7 +16,8 @@
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-calendly": "^4.3.1",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react-select": "^5.10.0"
   },
   "devDependencies": {
     "@types/next-pwa": "^5.6.9",

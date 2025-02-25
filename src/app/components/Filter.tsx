@@ -1,17 +1,31 @@
+import { useState } from "react";
 import styles from "@/styles/Filter.module.css";
+import CourthouseSelect from "./CourthouseSelect";
 
 interface FilterProps {
   onDateFilterChange: (date: string) => void;
   onProvinceFilterChange: (province: string) => void;
+  onCourthouseChange: (courthouse: string) => void; // !! courthouse or courthouseName?
 }
 
-export default function Filter({ onDateFilterChange, onProvinceFilterChange }: FilterProps) {
+export default function Filter({ onDateFilterChange, onProvinceFilterChange, onCourthouseChange }: FilterProps) {
+  const [province, setProvince] = useState<string>("");
+    const [courthouse, setCourthouse] = useState<string>("");
+
+
+  const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newProvince = e.target.value;
+    setProvince(newProvince);
+    onProvinceFilterChange(newProvince);
+  };
+
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onDateFilterChange(e.target.value);
   };
 
-  const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onProvinceFilterChange(e.target.value);
+  const handleCourthouseChange = (courthouse: string) => {
+    setCourthouse(courthouse);
+    onCourthouseChange(courthouse); // Use the prop here
   };
 
   return (
@@ -34,6 +48,15 @@ export default function Filter({ onDateFilterChange, onProvinceFilterChange }: F
         <option value="YT">Yukon</option>
       </select>
       <div className={styles.filterInputWrapper}>
+
+       <CourthouseSelect 
+        province={province || ""} 
+        onProvinceChange={setProvince} 
+        onCourthouseChange={handleCourthouseChange} 
+        courthouse={courthouse} 
+      />
+      </div>
+      <div className={styles.filterInputWrapper}>
         <label htmlFor="date">Filter by Appearance Date</label>
         <input
           type="date"
@@ -44,6 +67,7 @@ export default function Filter({ onDateFilterChange, onProvinceFilterChange }: F
           onChange={handleDateChange}
         />
       </div>
+      
     </div>
   );
 }

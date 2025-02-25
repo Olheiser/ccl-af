@@ -7,6 +7,12 @@ import emailAddress, { ProvinceEmailAddress } from "../util/emailAddresses";
 import { appearanceEmailTemplate } from "../util/appearanceEmailTemplate";
 import confirmationEmailTemplate from "../util/confirmationEmailTemplate";
 //import emailAddress from "../util/emailAddresses";
+//import CourthouseSelect from "./CourthouseSelect";
+import dynamic from "next/dynamic";
+
+const CourthouseSelect = dynamic(() => import("./CourthouseSelect"), {
+  ssr: false,
+});;
 
 interface CourtAppearance {
   lawyerName: string;
@@ -27,6 +33,14 @@ interface CourtAppearance {
 const LeadForm = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [province, setProvince] = useState<string>("");
+  const [courthouse, setCourthouse] = useState<string>("");
+
+  const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newProvince = e.target.value;
+    setProvince(newProvince);
+    setCourthouse(""); // Reset courthouse when province changes
+  };
 
   const form = useRef<HTMLFormElement | null>(null);
 
@@ -61,7 +75,7 @@ const LeadForm = () => {
       phone: formData.get('phone') as string,
       contactMethod: formData.get('contactMethod') as string,
       province: formData.get('province') as string,
-      courthouseName: formData.get('courthouse') as string,
+      courthouseName: courthouse,
       date: formData.get('date') as string,
       time: formData.get('time') as string,
       courtroomNumber: formData.get('courtroom') as string,
@@ -183,7 +197,7 @@ const LeadForm = () => {
 
         <div>
           <label htmlFor="email">Requesting Lawyer&apos;s Email Address</label>
-          <input type="email" name="email" id="email" required placeholder="Email Address..." pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+          <input type="email" name="email" id="email" required placeholder="Email Address..." pattern="^[^@]+@[^@]+\.[^@]+$" />
         </div>
 
         <div>
@@ -201,7 +215,7 @@ const LeadForm = () => {
 
         <div>
           <label htmlFor="province">Province</label>
-          <select name="province" id="province" required defaultValue="">
+          <select name="province" id="province" required value={province} onChange={handleProvinceChange}>
             <option value="" disabled hidden>Select a Province</option>
             <option value="AB">Alberta</option>
             <option value="BC">British Columbia</option>
@@ -219,10 +233,14 @@ const LeadForm = () => {
           </select>
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor="courthouse">Courthouse Name</label>
           <input type="text" name="courthouse" id="courthouse" required placeholder="Courthouse Name..." />
+        </div>*/}
+        <div>
+          <CourthouseSelect province={province} onProvinceChange={setProvince} onCourthouseChange={setCourthouse} courthouse={courthouse} />
         </div>
+        
 
         <div className={styles.dateContainer}>
           <label htmlFor="date">Date of Appearance</label>

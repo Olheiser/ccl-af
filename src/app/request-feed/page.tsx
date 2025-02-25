@@ -25,11 +25,17 @@ import { CourtAppearance } from "@/types";
     const [totalPages, setTotalPages] = useState(1);
     const [dateFilter, setDateFilter] = useState<string | undefined>(undefined);
     const [provinceFilter, setProvinceFilter] = useState<string | undefined>(undefined);
+    const [courthouseFilter, setCourthouseFilter] = useState<string | undefined>(undefined);
     const [loading, setLoading] = useState(true); // 
 
-    const fetchAppearances = async (page: number = 1, dateFilter?: string, provinceFilter?: string) => {
-      const url = `/api/appearances?page=${page}&date=${dateFilter || ''}&province=${provinceFilter || ''}`;
+    const fetchAppearances = async (page: number = 1, dateFilter?: string, provinceFilter?: string, courthouseFilter?: string) => {
+      const encodedCourthouseFilter = courthouseFilter ? encodeURIComponent(courthouseFilter) : "";
+      const url = `/api/appearances?page=${page}&date=${dateFilter || ""}&province=${provinceFilter || ""}&courthouseName=${encodedCourthouseFilter || ""}`;
+      console.log(`Courthouse Filter: ${courthouseFilter}`);
+      console.log(`Encoded Courthouse Filter: ${encodedCourthouseFilter}`);
+      console.log(`URL string: ${url}`)
       const response = await fetch(url);
+      console.log(`url object: ${response.json}`)
       if (!response.ok) {
         throw new Error('Failed to fetch court appearances');
       }
@@ -39,7 +45,7 @@ import { CourtAppearance } from "@/types";
     const loadAppearances = async () => {
       setLoading(true); //
       try {
-        const data = await fetchAppearances(page, dateFilter, provinceFilter);
+        const data = await fetchAppearances(page, dateFilter, provinceFilter, courthouseFilter);
         setAppearances(data.appearances);
         setTotalPages(data.totalPages);
       } catch (error) {
@@ -54,7 +60,7 @@ import { CourtAppearance } from "@/types";
       loadAppearances();
       const interval = setInterval(loadAppearances, 60000); // Refresh every 60 seconds
       return () => clearInterval(interval);
-    }, [page, dateFilter, provinceFilter]);
+    }, [page, dateFilter, provinceFilter, courthouseFilter]);
   
     // Handle pagination
     const handleNextPage = () => {
@@ -80,6 +86,11 @@ import { CourtAppearance } from "@/types";
       setProvinceFilter(province);
       setPage(1); // Reset to the first page when the filter changes
     };
+
+    const handleCourthouseFilterChange = (courthouse: string) => {
+      setCourthouseFilter(courthouse);
+      setPage(1);
+    }
   
     return (
       <main className={styles.pageBody}>
@@ -111,6 +122,7 @@ import { CourtAppearance } from "@/types";
           <Filter
             onDateFilterChange={handleDateFilterChange}
             onProvinceFilterChange={handleProvinceFilterChange}
+            onCourthouseChange={handleCourthouseFilterChange}
           />
         </aside>
       </div>

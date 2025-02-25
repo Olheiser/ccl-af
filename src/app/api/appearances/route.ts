@@ -41,6 +41,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const dateFilter = searchParams.get('date'); // Filter by date
   const provinceFilter = searchParams.get('province'); // Filter by province
+  const courthouseFilter = searchParams.get('courthouseName'); // Filter by courthouse
   const page = parseInt(searchParams.get('page') || '1'); // Pagination
   const pageSize = 20; // Number of items per page
 
@@ -57,6 +58,12 @@ export async function GET(request: Request) {
     // Filter by province
     if (provinceFilter) {
       q = query(q, where('province', '==', provinceFilter));
+    }
+
+    if (courthouseFilter) {
+      console.log(`Courthouse filter: ${courthouseFilter}`)
+
+      q = query(q, where('courthouseName', '==', courthouseFilter));
     }
 
     // Pagination
