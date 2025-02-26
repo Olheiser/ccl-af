@@ -1,19 +1,22 @@
-import styles from "@/styles/Home.module.css";
+'use client'
 
-// For security
+import { useEffect } from "react";
+import styles from "@/styles/Home.module.css";
 import LeadForm from "./components/LeadForm";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Agent Finder - Request an Appearance",
-  description: "This website is used to find an agent to appear on your behalf. ",
-  alternates: {
-    canonical: 'https://agentfinder.canadacriminallawyer.ca',
-  }
-};
-
-export default async function Home() {
+export default function Home() {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then((registration) => {
+          console.log('Service Worker registered with scope:', registration.scope)
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error)
+        })
+    }
+  }, [])
   
   return (
 

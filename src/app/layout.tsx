@@ -17,8 +17,12 @@ import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
 });*/
 
 export const metadata: Metadata = {
-  title: "Agent Finder | Request for an appearance platform",
+  title: "Agent Finder - Request an Appearance",
   description: "Need a criminal lawyer to appear for you? We got you covered. Fill out the form and we'll help to arrange an appearance.",
+  alternates: {
+    canonical: 'https://agentfinder.canadacriminallawyer.ca',
+  },
+   manifest: '/manifest.json'
 };
 
 export default function RootLayout({
