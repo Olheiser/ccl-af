@@ -131,3 +131,39 @@
         }
     }
 
+/* Add to Homescreen Popup */
+/* Home.module.css */
+/* Home.module.css or a separate CSS file */
+
+/* Unique class names for the PWA install prompt */
+.pwa-install-prompt {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+  
+  .pwa-install-prompt__title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #333; /* Adjust color as needed */
+  }
+  
+  .pwa-install-prompt__button {
+    background: #bb0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .pwa-install-prompt__button:hover {
+    background: hsla(350, 100%, 35%, 0.664);
+  }
