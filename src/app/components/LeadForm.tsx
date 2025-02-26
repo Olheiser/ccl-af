@@ -171,10 +171,16 @@ const LeadForm = () => {
       // ==================================================================================================================
 
       const emailsToSend = emailAddress[appearance.province as keyof ProvinceEmailAddress] || [];
+      console.log(`Emails to send: ${emailsToSend}`)
+      console.log(`Appearance.email: ${appearance.email}`)
 
-      if (emailsToSend.length > 0) {
+      // Filter out the submitted email address from the Appearances email list (if it exists)
+      const filteredEmailsToSend = emailsToSend.filter(email => email !== appearance.email);
+      console.log(`Filtered Emails: ${filteredEmailsToSend}`)
+
+      if (filteredEmailsToSend.length > 0) {
         const emailData = {
-          to: emailsToSend,
+          to: filteredEmailsToSend,
           subject: `${appearance.province}: Appearance Request - ${appearance.lawyerName} | ${appearance.courthouseName} ${appearance.date}`,
           text: `${appearance.lawyerName} has submitted a new request for appearance at ${appearance.courthouseName} on ${appearance.date} at ${appearance.time}. You can reach ${appearance.lawyerName} at ${appearance.email} for more information.
 
