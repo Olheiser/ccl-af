@@ -4,6 +4,81 @@ import styles from "@/styles/Calendar.module.css"
 import CourthouseSelect from '../CourthouseSelect';
 import { useState } from 'react';
 import { findProvince } from '@/app/util/util';
+import { StylesConfig } from 'react-select';
+
+interface OptionType {
+  value: string;
+  label: string;
+  province: string;
+}
+
+const calendarAutoCompleteStyles: StylesConfig<OptionType, false> = {
+  control: (provided) => ({
+    ...provided,
+    padding: '1px 5px 1px 0', // Match padding
+    borderRadius: '5px', // Match border radius
+    border: '1px solid #ccc', // Match border color
+    fontSize: '14px', // Match font size
+    marginBottom: '12px', // Match margin bottom
+    width: '100%', // Match width
+    boxSizing: 'border-box', // Match box sizing
+    marginTop: '3px', // Match margin top
+    backgroundColor: '#ffffff', // Match background color
+    boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.1)', // Match box shadow
+    fontFamily: '"Optima Nova LT", sans-serif', // Match font family
+    color: '#333333', // Match text color
+    '&:focus': {
+      borderColor: '#888', // Match focus border color
+      outline: 'none', // Remove default outline
+      boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.15)', // Match focus box shadow
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif', // Match font family
+    color: state.isFocused ? '#ffffff' : '#333333', // Match text color on hover
+    fontSize: '14px', // Match font size
+    backgroundColor: state.isSelected
+      ? '#f0f0f0' // Background color for selected option
+      : state.isFocused
+      ? '#007bff' // Background color for hovered option
+      : '#ffffff', // Default background color
+    '&:active': {
+      backgroundColor: '#0056b3', // Background color when the option is clicked
+    },
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif', // Match font family
+    color: '#000000', // Match text color
+    fontSize: '14px', // Match font size
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif', // Match font family
+    color: '#333333', // Match placeholder color
+    fontSize: '14px', // Match font size
+  }),
+  menu: (provided) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif', // Match font family
+    color: '#000000', // Match text color
+    fontSize: '14px', // Match font size
+    borderRadius: '5px', // Match border radius
+    boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.1)', // Match box shadow
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: '#333333', // Match dropdown indicator color
+    '&:hover': {
+      color: '#888', // Match hover color
+    },
+  }),
+  indicatorSeparator: (provided) => ({
+    ...provided,
+    backgroundColor: '#333333', // Match separator color
+  }),
+};
 
 interface CalendarHeaderProps {
     monthIndex: number;
@@ -61,6 +136,7 @@ interface CalendarHeaderProps {
           needLabel={false}
           courtStyles={"calendarAutocomplete"}
           required={false}
+          styles={calendarAutoCompleteStyles}
         />
         <select
           name="province"

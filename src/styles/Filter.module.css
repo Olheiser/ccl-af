@@ -24,6 +24,7 @@
 
 .filterInputWrapper input[type="date"] {
     width: 100%;
+    font-family: "Optima Nova LT", sans-serif;
 }
 
 .filterContainer input, 
@@ -37,7 +38,7 @@
     width: 100%;
     box-sizing: border-box;
     margin-top: 3px;
-
+    font-family: "Optima Nova LT", sans-serif;
     /* Soft shadow effect */
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -47,6 +48,7 @@
 .filterContainer input[type="date"] {
 
     background-color: white;
+    color: #000000;
 }
 
 .filterContainer label {
@@ -59,7 +61,7 @@
 
 .filterContainer select option, .filterContainer select:invalid {
     font-family: "Optima Nova LT", sans-serif;
-    color: #333333;
+    color: #000000;
     font-size: 14px;   
 }
 

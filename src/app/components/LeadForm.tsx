@@ -6,9 +6,71 @@ import styles from '@/styles/LeadForm.module.css';
 import emailAddress, { ProvinceEmailAddress } from "../util/emailAddresses";
 import { appearanceEmailTemplate } from "../util/appearanceEmailTemplate";
 import confirmationEmailTemplate from "../util/confirmationEmailTemplate";
+import { StylesConfig } from "react-select";
 //import emailAddress from "../util/emailAddresses";
 //import CourthouseSelect from "./CourthouseSelect";
 import dynamic from "next/dynamic";
+
+interface OptionType {
+  value: string;
+  label: string;
+  province: string;
+}
+
+const leadAutoCompleteStyles: StylesConfig<OptionType, false> = {
+  control: (provided) => ({
+    ...provided,
+    padding: '2px 5px 2px 10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+    marginBottom: '12px',
+    width: '100%',
+    boxSizing: 'border-box',
+    marginTop: '3px',
+    backgroundColor: '#ffffff',
+    boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.1)',
+    fontFamily: '"Optima Nova LT", sans-serif',
+    color: '#333333',
+    '&:focus': {
+      borderColor: '#888',
+      outline: 'none',
+      boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.15)',
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif',
+    color: state.isFocused ? '#ffffff' : '#333333', // Change font color on hover
+    fontSize: '14px',
+    backgroundColor: state.isSelected
+      ? '#f0f0f0' // Background color for selected option
+      : state.isFocused
+      ? '#007bff' // Background color for hovered option
+      : '#ffffff', // Default background color
+    '&:active': {
+      backgroundColor: '#0056b3', // Background color when the option is clicked
+    },
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif',
+    color: '#333333',
+    fontSize: '14px',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif',
+    color: '#333333',
+    fontSize: '14px',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    fontFamily: '"Optima Nova LT", sans-serif',
+    color: '#333333',
+    fontSize: '14px',
+  }),
+};
 
 const CourthouseSelect = dynamic(() => import("./CourthouseSelect"), {
   ssr: false,
@@ -253,6 +315,7 @@ const LeadForm = () => {
           needLabel={true} 
           courtStyles={"leadFormAutocomplete"}
           required={true}
+          styles={leadAutoCompleteStyles}
           />
         </div>
         

@@ -10,61 +10,6 @@ interface OptionType {
 }
 
 // Define the custom styles with proper TypeScript types
-const customStyles: StylesConfig<OptionType, false> = {
-  control: (provided) => ({
-    ...provided,
-    padding: '2px 5px 2px 10px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    fontSize: '14px',
-    marginBottom: '12px',
-    width: '100%',
-    boxSizing: 'border-box',
-    marginTop: '3px',
-    backgroundColor: '#ffffff',
-    boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.1)',
-    fontFamily: '"Optima Nova LT", sans-serif',
-    color: '#333333',
-    '&:focus': {
-      borderColor: '#888',
-      outline: 'none',
-      boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.15)',
-    },
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    fontFamily: '"Optima Nova LT", sans-serif',
-    color: state.isFocused ? '#ffffff' : '#333333', // Change font color on hover
-    fontSize: '14px',
-    backgroundColor: state.isSelected
-      ? '#f0f0f0' // Background color for selected option
-      : state.isFocused
-      ? '#007bff' // Background color for hovered option
-      : '#ffffff', // Default background color
-    '&:active': {
-      backgroundColor: '#0056b3', // Background color when the option is clicked
-    },
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    fontFamily: '"Optima Nova LT", sans-serif',
-    color: '#333333',
-    fontSize: '14px',
-  }),
-  placeholder: (provided) => ({
-    ...provided,
-    fontFamily: '"Optima Nova LT", sans-serif',
-    color: '#333333',
-    fontSize: '14px',
-  }),
-  menu: (provided) => ({
-    ...provided,
-    fontFamily: '"Optima Nova LT", sans-serif',
-    color: '#333333',
-    fontSize: '14px',
-  }),
-};
-
 
 type CourthouseOption = {
   label: string;
@@ -80,6 +25,7 @@ type CourthouseSelectProps = {
   needLabel: boolean;
   courtStyles: string;
   required?: boolean;
+  styles?: StylesConfig<OptionType, false>;
 };
 
 const CourthouseSelect = ({
@@ -90,6 +36,7 @@ const CourthouseSelect = ({
   needLabel,
   courtStyles,
   required = false,
+  styles: customeStylesProp,
 }: CourthouseSelectProps) => {
   const [selectedCourthouse, setSelectedCourthouse] = useState<CourthouseOption | null>(null);
 
@@ -141,7 +88,7 @@ const CourthouseSelect = ({
         placeholder="Select a courthouse..."
         className={styles[courtStyles]}
         isClearable={true}
-        styles={customStyles}
+        styles={customeStylesProp}
       />
       <input
         type="hidden"
