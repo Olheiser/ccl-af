@@ -1,5 +1,6 @@
 // Purpose of this file: Shared functions to use across certain components
 import dayjs from 'dayjs';
+import { courthouses } from './courthouses';
 
 // receives a month (number between 0-11)
 /* dayjs is an instance of the dayjs object that has a bunch of information. Passing in no value will give you the present moment, just like the date object. We're assigning the current month as the default value.  */
@@ -62,4 +63,9 @@ export function getCourtroomWithPrefix(courtroomNumber: string | undefined): str
 
   // If courtroomNumber is not a string, return it as-is
   return courtroomNumber;
+}
+
+export function findProvince(courthouseName: string): string | null {
+  const courthouse = courthouses.find(c => c.courthouseName === courthouseName);
+  return courthouse ? courthouse.province : null;
 }

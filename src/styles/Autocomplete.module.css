@@ -1,0 +1,22 @@
+.calendarAutocomplete, .leadFormAutocomplete, .requestAutocomplete {
+    font-family: "Optima Nova LT", Arial, Helvetica, sans-serif;
+}
+
+/* Calendar Header */
+.calendarAutocomplete {
+    display: flex;
+}
+
+/* Lead Form*/
+
+.leadFormAutocomplete {
+    margin-top: 3px;
+    
+}  
+
+
+/* Filter */
+.requestAutocomplete {
+    margin-top: 3px;
+    margin-bottom: 10px;
+} 

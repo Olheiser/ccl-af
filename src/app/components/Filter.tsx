@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "@/styles/Filter.module.css";
 import CourthouseSelect from "./CourthouseSelect";
+import { findProvince } from "../util/util";
 
 interface FilterProps {
   onDateFilterChange: (date: string) => void;
@@ -26,6 +27,10 @@ export default function Filter({ onDateFilterChange, onProvinceFilterChange, onC
   const handleCourthouseChange = (courthouse: string) => {
     setCourthouse(courthouse);
     onCourthouseChange(courthouse); // Use the prop here
+
+    const province = findProvince(courthouse) || "";
+    const provinceElement = document.getElementById("province");
+    (provinceElement as HTMLInputElement).value = province;
   };
 
   return (
@@ -54,6 +59,9 @@ export default function Filter({ onDateFilterChange, onProvinceFilterChange, onC
         onProvinceChange={setProvince} 
         onCourthouseChange={handleCourthouseChange} 
         courthouse={courthouse} 
+        needLabel={true}
+        courtStyles={"requestAutocomplete"}
+        required={false}
       />
       </div>
       <div className={styles.filterInputWrapper}>

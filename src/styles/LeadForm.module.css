@@ -317,3 +317,9 @@
 .radioRow {
     margin-top: 10px;
 }
+
+.form p { 
+    text-align: center;
+    padding-top: 10px;
+    text-decoration: underline;
+}

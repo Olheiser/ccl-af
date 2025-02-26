@@ -60,7 +60,6 @@
   
 /* Province Filter */
 .provinceFilter {
-  margin-right: 5px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -69,6 +68,8 @@
   font-size: 14px;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+  margin-top: 3px;
 }
 
   /* Space between "Prev" and "Next" buttons */
@@ -180,9 +181,17 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
+    max-width: 525px;
     width: 100%;
     position: relative; /* For positioning the close button */
+    /* Add margin-top and margin-bottom */
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    /* Set a max-height to ensure the modal doesn't exceed the viewport height */
+    max-height: calc(100vh - 40px); /* 40px accounts for the top and bottom margins */
+
+    overflow-y: auto;
   }
   
   .modal h3 {
@@ -190,6 +199,7 @@
     font-size: 20px;
     color: #bb0000; /* Red accent */
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .modal p {
@@ -358,4 +368,36 @@
     .weekdayRow {
       font-size: 12px;
     }
+  }
+
+  /* Calendar Header -> Layout of the filters */
+  .filterContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;;
+  }
+
+  /* Accordion Styles */
+  .parentAccordionHeader {
+    background-color: #910102;
+  }
+
+  .parentAccordionHeader:hover {
+    background-color: #BB0000;
+  }
+
+  .parentAccordionHeader span {
+    color: #ffffff;
+  }
+
+  .accordion {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .singleAccordion {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .childAccordion {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   }

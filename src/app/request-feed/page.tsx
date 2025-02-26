@@ -5,19 +5,6 @@ import styles from "@/styles/RequestFeed.module.css";
 import Appearance from "../components/Appearance";
 import Filter from "../components/Filter";
 import { CourtAppearance } from "@/types";
-
-  /*interface CourtAppearance {
-    id: string;
-    lawyerName: string;
-    email: string;
-    date: string;
-    time: string;
-    courthouseName: string;
-    courtroomNumber: string;
-    typeOfAppearance: string;
-    instructions: string;
-    province: string;
-  }*/
   
   export default function Page() {
     const [appearances, setAppearances] = useState<CourtAppearance[]>([]);
@@ -104,7 +91,7 @@ import { CourtAppearance } from "@/types";
               <Appearance key={appearance.id!} appearance={appearance as Required<CourtAppearance>} />
             ))
           )}
-          {appearances.length > 15 && (
+          {appearances.length > 1 && (
             <div className={styles.pagination}>
               <button onClick={handlePrevPage} disabled={page === 1}>
                 Previous

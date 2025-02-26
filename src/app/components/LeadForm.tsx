@@ -62,6 +62,11 @@ const LeadForm = () => {
     e.preventDefault();
     setError(null); // Reset any previous errors
 
+    if (!courthouse) {
+      setError("Courthouse is required.");
+      return;
+    }
+
     if (!form.current) {
       console.error("Form reference is undefined");
       return;
@@ -183,6 +188,8 @@ const LeadForm = () => {
     if (form.current) {
       form.current.reset(); // Resets all input fields
     }
+    setProvince(""); // Reset province state
+    setCourthouse(""); // Reset courthouse state
     setFormSubmitted(false); // Allow form to be submitted again
   }
 
@@ -238,7 +245,15 @@ const LeadForm = () => {
           <input type="text" name="courthouse" id="courthouse" required placeholder="Courthouse Name..." />
         </div>*/}
         <div>
-          <CourthouseSelect province={province} onProvinceChange={setProvince} onCourthouseChange={setCourthouse} courthouse={courthouse} />
+          <CourthouseSelect 
+          province={province} 
+          onProvinceChange={setProvince} 
+          onCourthouseChange={setCourthouse} 
+          courthouse={courthouse} 
+          needLabel={true} 
+          courtStyles={"leadFormAutocomplete"}
+          required={true}
+          />
         </div>
         
 

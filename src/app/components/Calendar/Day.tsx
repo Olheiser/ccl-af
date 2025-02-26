@@ -53,6 +53,7 @@ export default function Day({ day, courtAppearances }: DayProps) {
         >
           {day.format('DD')}
         </div>
+        {/* Grouped Requests */}
         <div className={styles.dayLabels}>
           {matchingCourtAppearances.length > 2 ? (
             <div className={styles.dayLabel} onClick={handleDayClick}>
@@ -69,6 +70,7 @@ export default function Day({ day, courtAppearances }: DayProps) {
           )}
         </div>
       </div>
+      {/* Grouped Requests */}
       {isDayModalOpen && (
         <DayModal
           appearances={matchingCourtAppearances}
