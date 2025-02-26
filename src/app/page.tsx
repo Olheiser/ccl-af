@@ -81,7 +81,7 @@ export default function Home() {
 
       {isMobile && !isStandalone && (
         <div className="pwa-install-prompt">
-          <h3 className="pwa-install-prompt__title">Install App</h3>
+          <h3 className="pwa-install-prompt__title">Install Agent Finder</h3>
           <button className="pwa-install-prompt__button" onClick={handleInstallPrompt}>
             Add to Home Screen
           </button>
