@@ -26,7 +26,7 @@ const emailAddress: ProvinceEmailAddress = {
     "ON": [],
     "PE": [],
     "QC": [],
-    "SK": ["nick@nprobinson.com"],
+    "SK": ["tanner.olheiser@gmail.com"],
     "YT": []
 }
 
