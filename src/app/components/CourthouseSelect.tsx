@@ -89,6 +89,7 @@ const CourthouseSelect = ({
         className={styles[courtStyles]}
         isClearable={true}
         styles={customeStylesProp}
+        instanceId="courthouse-select"
       />
       <input
         type="hidden"
