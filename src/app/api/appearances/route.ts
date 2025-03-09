@@ -60,18 +60,19 @@ export async function GET(request: Request) {
 
     // Filter by date (only fetch future appearances)
     if (dateFilter) {
-      console.log(`Date filter: ${dateFilter}`)
+      console.log(`Route's Date filter: ${dateFilter}`)
     
       q = query(q, where('date', '==', dateFilter));    
     }
 
     // Filter by province
     if (provinceFilter) {
+      console.log(`Route's Province filter: ${provinceFilter}`);
       q = query(q, where('province', '==', provinceFilter));
     }
 
     if (courthouseFilter) {
-      console.log(`Courthouse filter: ${courthouseFilter}`)
+      console.log(`Route's Courthouse filter: ${courthouseFilter}`)
 
       q = query(q, where('courthouseName', '==', courthouseFilter));
     }
@@ -87,6 +88,8 @@ export async function GET(request: Request) {
     const appearances = snapshot.docs
       .slice(startIndex, endIndex)
       .map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      console.log(`Fetched appearances: ${JSON.stringify(appearances)}`);
 
     return NextResponse.json({
       appearances,

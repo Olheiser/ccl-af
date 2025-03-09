@@ -14,4 +14,5 @@ export type CourtAppearance = {
   accusedStatus?: string; // Optional
   designationStatus?: string; // Optional
   instructions?: string;     // Optional
+  timestamp?: string;
   };

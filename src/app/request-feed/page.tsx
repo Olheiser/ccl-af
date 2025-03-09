@@ -20,10 +20,13 @@ import { CourtAppearance } from "@/types";
       const url = `/api/appearances?page=${page}&date=${dateFilter || ""}&province=${provinceFilter || ""}&courthouseName=${encodedCourthouseFilter || ""}`;
       console.log(`Courthouse Filter: ${courthouseFilter}`);
       console.log(`Encoded Courthouse Filter: ${encodedCourthouseFilter}`);
+      console.log(`Province filter: ${provinceFilter}`)
       console.log(`URL string: ${url}`)
       const response = await fetch(url);
       console.log(`url object: ${response.json}`)
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error(`Failed to fetch court appearances: ${response.status} - ${errorData.error}`);
         throw new Error('Failed to fetch court appearances');
       }
       return response.json();
