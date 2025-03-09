@@ -42,11 +42,21 @@ export async function GET(request: Request) {
   const dateFilter = searchParams.get('date'); // Filter by date
   const provinceFilter = searchParams.get('province'); // Filter by province
   const courthouseFilter = searchParams.get('courthouseName'); // Filter by courthouse
+  //const excludePast = searchParams.get('excludePast') === 'true'; // Exclude past appearances
   const page = parseInt(searchParams.get('page') || '1'); // Pagination
   const pageSize = 20; // Number of items per page
 
   try {
-    let q = query(collection(db, 'appearances'), orderBy('date'));
+    //let q = query(collection(db, 'appearances'), orderBy('date'));
+    let q = query(collection(db, 'appearances'), orderBy('timestamp', 'desc')); // Order by timestamp in descending order
+
+    /*if (excludePast) {
+      const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+      console.log(`Today: ${today}`)
+      q = query(q, where('date', '>=', today)); // Only include appearances with dates >= today
+    } else if (dateFilter) {
+      q = query(q, where('date', '==', dateFilter)); // Filter by specific date
+    }*/
 
     // Filter by date (only fetch future appearances)
     if (dateFilter) {

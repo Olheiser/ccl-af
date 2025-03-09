@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
 import styles from '@/styles/LeadForm.module.css';
 import emailAddress, { ProvinceEmailAddress } from "../util/emailAddresses";
 import { appearanceEmailTemplate } from "../util/appearanceEmailTemplate";
@@ -90,6 +89,7 @@ interface CourtAppearance {
   accusedStatus: string;
   designationStatus: string;
   instructions: string;
+  timestamp?: string;
 }
 
 const LeadForm = () => {
@@ -107,12 +107,17 @@ const LeadForm = () => {
   const form = useRef<HTMLFormElement | null>(null);
 
   const submitAppearance = async (appearance: CourtAppearance) => {
+    const appearanceWithTimestamp = {
+      ...appearance,
+      timestamp: new Date().toISOString(), // Add current timestamp
+    };
+    
     const response = await fetch('/api/appearances', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(appearance),
+      body: JSON.stringify(appearanceWithTimestamp),
     });
     if (!response.ok) {
       throw new Error('Failed to add court appearance');
@@ -156,15 +161,6 @@ const LeadForm = () => {
       // Submit the form data to the API
       await submitAppearance(appearance);
       console.log('Court appearance submitted successfully');
-
-      // Send email using EmailJS
-      await emailjs.sendForm(
-        "service_zlvlw4s",
-        "template_vkqmvak",
-        form.current,
-        { publicKey: "AP4HXf2HPRERJu4fd" }
-      );
-      console.log('Email sent successfully');
 
       // ==================================================================================================================
       // ==================================================================================================================
@@ -243,6 +239,24 @@ const LeadForm = () => {
       throw new Error('Failed to send confirmation email');
     }
 
+    const logEmailData = {
+      to: "agentfinder@canadacriminallawyer.ca",
+      subject: `Appearance Request - ${appearance.lawyerName} at ${appearance.courthouseName} on ${appearance.date}`,
+      text: `Dear ${appearance.lawyerName},\n\nYour request for appearance at ${appearance.courthouseName} on ${appearance.date} at ${appearance.time} has been received. Thank you, The Agent Finder Team.`,
+      html: confirmationEmailTemplate(appearance),
+    }
+
+    const logEmailResponse = await fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(logEmailData),
+    })
+
+    if (!logEmailResponse.ok) {
+      throw new Error('Failed to send confirmation email');
+    }
 
       // Mark the form as submitted
       setFormSubmitted(true);

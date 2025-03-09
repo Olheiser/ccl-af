@@ -11,5 +11,6 @@ export interface CourtAppearance {
     courtroomNumber: string;
     typeOfAppearance: string;
     instructions: string;
+    timestamp?: string;
   }
 
