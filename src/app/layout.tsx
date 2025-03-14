@@ -5,7 +5,7 @@ import ScrollToTop from "./components/ScrollToTop";
 //import CalendlyPopupButton from "./components/CalendlyPopupButton";
 import "./globals.css"
 import type { Metadata } from "next";
-import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
+//import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
 //import { Roboto } from 'next/font/google';
 
 //import { PopupButton } from "react-calendly";
@@ -45,7 +45,7 @@ export default function RootLayout({
         <ScrollToTop />
         {/* <CalendlyPopupButton />*/}
         <Footer />
-        <ServiceWorkerRegistration />
+        {/*<ServiceWorkerRegistration />*/}
       </body>
     </html>
   );
