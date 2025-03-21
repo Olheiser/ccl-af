@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import SignUpHeader from "./components/SignUpHeader";
 // ! Script  import Script from "next/script"; // Import Script from Next.js
 //import CalendlyPopupButton from "./components/CalendlyPopupButton";
 import "./globals.css"
@@ -40,6 +41,7 @@ export default function RootLayout({
       </head>
       <body id="root">
         <Header />
+        <SignUpHeader />
          {/* <PageHeader title="About" /> */}
         {children}
         <ScrollToTop />

@@ -1,0 +1,48 @@
+.signUpContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 0 0;
+  }
+
+.signUpRow {
+    width: 100%; /* Changed from max-width */
+    max-width: 1280px; /* Now works with width: 100% */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px 15px 15px 15px;
+    background-color: white;
+    border: 2px solid #f6f6f6;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.10);
+}
+
+.signUpContainer p {
+    font-size: 20px;
+    font-family: "Optima Nova LT", Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.signupLink {
+    color: #007b8b;
+}
+
+.signupLink:hover {
+    color: #bb0000;
+}
+
+@media screen and (min-width: 770px) and (max-width: 1479px) {
+    .signUpRow {
+        padding-left: 60px;
+        padding-right: 60px;
+        padding-bottom: 40px;
+    }
+}
+
+@media screen and (min-width: 1480px) {
+    .signUpRow {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
