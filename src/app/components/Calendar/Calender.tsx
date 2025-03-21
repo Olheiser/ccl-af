@@ -62,11 +62,12 @@ export default function Calendar({ courtAppearances: initialAppearances = [] }: 
 
   const currentMonth = getMonth(monthIndex);
 
-  function getMonth(month = dayjs().month()) {
-    console.log(`Starting getMonth with month: ${month}, month name: ${dayjs().month(month).format('MMMM')}`);
+  function getMonth(monthIndex: number, currentYear = dayjs().year()) {
+    // Calculate the correct year and month based on the monthIndex
+    const year = currentYear + Math.floor(monthIndex / 12);
+    const month = monthIndex % 12;
   
-    const year = dayjs().year();
-    console.log(`Current year being used: ${year}`);
+    console.log(`Starting getMonth with monthIndex: ${monthIndex}, year: ${year}, month: ${month}, month name: ${dayjs().month(month).format('MMMM')}`);
   
     const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
     console.log(`First day of the month falls on: ${firstDayOfTheMonth} (0=Sunday, 6=Saturday)`);

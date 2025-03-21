@@ -30,6 +30,7 @@
 
 .signupLink:hover {
     color: #bb0000;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 770px) and (max-width: 1479px) {
