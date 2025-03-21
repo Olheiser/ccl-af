@@ -10,25 +10,20 @@ interface MonthProps {
     courtAppearances: CourtAppearance[];
   }
 
-export default function Month({ month, courtAppearances }: MonthProps) {
-  return (
-    <>
-      {month.map((row, i) => (
-        <div key={i} className={styles.weekRow}>
-          {row.map((day, idx) => {
-            if (idx !== 0 && idx !== 6) { // Exclude weekends
-              return (
-                <Day
-                  key={idx}
-                  day={day}
-                  courtAppearances={courtAppearances}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-      ))}
-    </>
-  );
-}
+  export default function Month({ month, courtAppearances }: MonthProps) {
+    return (
+      <>
+        {month.map((row, i) => (
+          <div key={i} className={styles.weekRow}>
+            {row.map((day, idx) => (
+              <Day
+                key={idx}
+                day={day}
+                courtAppearances={courtAppearances}
+              />
+            ))}
+          </div>
+        ))}
+      </>
+    );
+  }
